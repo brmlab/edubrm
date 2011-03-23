@@ -1,0 +1,10 @@
+#!/usr/bin/python
+
+import sys
+from PyQt4.QtGui import QApplication
+from main import Main
+
+app = QApplication(sys.argv)
+window = Main()
+window.show()
+sys.exit(app.exec_())
