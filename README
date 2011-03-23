@@ -3,7 +3,11 @@ EduBRM by Hackerspace brmlab
 
 http://brmlab.cz/
 
-Authors:
---------
+Authors
+-------
 Tomislav "sargon" Arnaudov
 Pavol "stick" Rusnak
+
+Software
+--------
+- required packages: python-qt4-devel
