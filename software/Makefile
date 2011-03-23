@@ -1,9 +1,9 @@
-all: edubrm mainUi.py resources.py
+all: edubrm mainUi.py resources_rc.py
 
 mainUi.py: main.ui
 	pyuic4 main.ui -o mainUi.py
 
-resources.py:
+resources_rc.py:
 	pyrcc4 resources.qrc -o resources_rc.py
 
 clean:
