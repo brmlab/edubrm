@@ -1,7 +1,22 @@
 #!/usr/bin/python
 
-from device import Device
+from twisted.internet import reactor
+from twisted.internet.serialport import SerialPort
+from twisted.protocols.basic import LineOnlyReceiver
 
-d = Device()
-d.open('')
-d.close()
+class EduBrmSerial(LineOnlyReceiver):
+
+    def dataReceived(self, data):
+        print 'dataReceived', data
+
+    def lineReceived(self, line):
+        print 'lineReceived', data
+
+    def sendLine(self, line):
+        pass
+
+port = '/dev/ttyUSB0'
+baud = 9600
+
+SerialPort(EduBrmSerial(), port, reactor, baud)
+reactor.run()

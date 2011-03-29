@@ -1,24 +1,33 @@
-import serial
+from twisted.internet import reactor
+from twisted.internet.serialport import SerialPort
+from twisted.protocols.basic import LineOnlyReceiver
+
+class EduBrmSerial(LineOnlyReceiver):
+
+    def dataReceived(self, data):
+        print 'dataReceived', data
+
+    def lineReceived(self, line):
+        print 'lineReceived', data
+
+    def sendLine(self, line):
+        pass
 
 class Device:
 
-    def __init__(self):
-        self.ser = serial.Serial()
+    def __init__(self, port, baud = 9600):
+        SerialPort(EduBrmSerial(), port, reactor, baud)
+        reactor.run()
 
-    def open(self, tty):
-        # (port=None, baudrate=9600, bytesize=EIGHTBITS, parity=PARITY_NONE, stopbits=STOPBITS_ONE, timeout=None, xonxoff=False, rtscts=False, writeTimeout=None, dsrdtr=False, interCharTimeout=None)
-        self.ser.port = tty
-        self.timeout = 1
-        self.ser.open()
+    def send(self, *args):
+        if not self.ser.isOpen():
+            return -1
+        return self.ser.write(' '.join(map(str,args)) + '\n')
 
-    def close(self):
-        self.ser.close()
-
-    def command(self, text):
+    def recv(self):
         if not self.ser.isOpen():
             return None
-        self.ser.write(text + '\n')
-        return self.ser.readline().strip()
+        return self.ser.readline().strip().split(' ')
 
     """
     Ping the device
@@ -27,7 +36,7 @@ class Device:
     E> PONG
     """
     def ping(self):
-        return self.command('PING') == 'PONG'
+        return self.send('PING') == 'PONG'
 
     """
     Read version
@@ -36,7 +45,7 @@ class Device:
     E> VERSION EDUBRM 1.0.0
     """
     def version(self):
-        r = self.command('VERSION')
+        r = self.send('VERSION')
         if r:
             r = r.split(' ')
             if len(r) == 3 and r[0] == 'VERSION' and r[1] == 'EDUBRM':
@@ -58,7 +67,7 @@ class Device:
     E> CFGIO FOOOPPPPPPPPPPPPOPfPPPPPPIIioAOP
     """
     def cfgio(self):
-        r = self.command('CFGIO')
+        r = self.send('CFGIO')
         if r and r.startswith('CFGIO '):
             return r[6:]
         return None
@@ -70,7 +79,7 @@ class Device:
     E> CFGIO OK
     """
     def cfgio(self, state):
-        r = self.command('CFGIO %s' % state)
+        r = self.send('CFGIO', state)
         return r == 'CFGIO OK'
 
     """
@@ -80,7 +89,7 @@ class Device:
     E> GETIO 10011111111111110111111111111101
     """
     def getio(self):
-        r = self.command('GETIO')
+        r = self.send('GETIO')
         if r and r.startswith('GETIO '):
             return r[6:]
         return None
@@ -92,7 +101,7 @@ class Device:
     E> SETIO OK
     """
     def setio(self, state):
-        r = self.command('SETIO %s' % state)
+        r = self.send('SETIO', state)
         return r == 'SETIO OK'
 
     """
@@ -102,7 +111,7 @@ class Device:
     E> CLRIO OK
     """
     def clrio(self, state):
-        r = self.command('CLRIO %s' % state)
+        r = self.send('CLRIO', state)
         return r == 'CLRIO OK'
 
     """
@@ -112,5 +121,5 @@ class Device:
     E> PULSE OK
     """
     def pulse(self, pin, duration):
-        r = self.command('PULSE %d %d' % (pin, duration))
+        r = self.send('PULSE', pin, duration)
         return r == 'PULSE OK'
