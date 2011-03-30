@@ -3,22 +3,37 @@ import serial
 class Device:
 
     def __init__(self):
-        self.ser = serial.Serial()
+        self.sctrl = serial.Serial()
+        self.sdata = serial.Serial()
 
-    def open(self, tty):
-        # (port=None, baudrate=9600, bytesize=EIGHTBITS, parity=PARITY_NONE, stopbits=STOPBITS_ONE, timeout=None, xonxoff=False, rtscts=False, writeTimeout=None, dsrdtr=False, interCharTimeout=None)
-        self.ser.port = tty
-        self.timeout = 1
-        self.ser.open()
+    def open(self, ttyctrl, ttydata):
+        self.sctrl.port = ttyctrl
+        self.sdata.port = ttydata
+        self.sctrl.baudrate = 115200
+        self.sdata.baudrate = 921600
+        self.sctrl.open()
+        self.sdata.open()
 
     def close(self):
-        self.ser.close()
+        self.sdata.close()
+        self.sctrl.close()
 
-    def command(self, text):
-        if not self.ser.isOpen():
+    def cmd(self, *args):
+        if not self.sctrl.isOpen():
             return None
-        self.ser.write(text + '\n')
-        return self.ser.readline().strip()
+        self.sctrl.write(' '.join(args) + '\n')
+        return self.sctrl.readline().strip().split(' ')
+
+    def send(self, buf):
+        if not self.sdata.isOpen():
+            return -1
+        return self.sdata.write(buf)
+
+    def recv(self, size):
+        if not self.sdata.isOpen():
+            return None
+        return self.sdata.read(size)
+
 
     """
     Ping the device
@@ -27,7 +42,7 @@ class Device:
     E> PONG
     """
     def ping(self):
-        return self.command('PING') == 'PONG'
+        return self.cmd('PING') == ['PONG']
 
     """
     Read version
@@ -36,12 +51,14 @@ class Device:
     E> VERSION EDUBRM 1.0.0
     """
     def version(self):
-        r = self.command('VERSION')
-        if r:
-            r = r.split(' ')
-            if len(r) == 3 and r[0] == 'VERSION' and r[1] == 'EDUBRM':
-                return r[2]
+        r = self.cmd('VERSION')
+        if r and r[0] == 'VERSION' and r[1] == 'EDUBRM':
+            return r[2]
         return None
+
+# TODO: ANALOG PINS
+# TODO: PWM
+# TODO: SPI
 
     """
     Read current configuration
@@ -58,9 +75,9 @@ class Device:
     E> CFGIO FOOOPPPPPPPPPPPPOPfPPPPPPIIioAOP
     """
     def cfgio(self):
-        r = self.command('CFGIO')
-        if r and r.startswith('CFGIO '):
-            return r[6:]
+        r = self.cmd('CFGIO')
+        if r and r[0] == 'CFGIO':
+            return r[1]
         return None
 
     """
@@ -70,8 +87,8 @@ class Device:
     E> CFGIO OK
     """
     def cfgio(self, state):
-        r = self.command('CFGIO %s' % state)
-        return r == 'CFGIO OK'
+        r = self.cmd('CFGIO', state)
+        return r == ['CFGIO', 'OK']
 
     """
     Read all inputs
@@ -80,9 +97,9 @@ class Device:
     E> GETIO 10011111111111110111111111111101
     """
     def getio(self):
-        r = self.command('GETIO')
-        if r and r.startswith('GETIO '):
-            return r[6:]
+        r = self.cmd('GETIO')
+        if r and r[0] == 'GETIO':
+            return r[1]
         return None
 
     """
@@ -92,8 +109,8 @@ class Device:
     E> SETIO OK
     """
     def setio(self, state):
-        r = self.command('SETIO %s' % state)
-        return r == 'SETIO OK'
+        r = self.cmd('SETIO', state)
+        return r == ['SETIO', 'OK']
 
     """
     Set all outputs to logical 0
@@ -102,15 +119,45 @@ class Device:
     E> CLRIO OK
     """
     def clrio(self, state):
-        r = self.command('CLRIO %s' % state)
-        return r == 'CLRIO OK'
+        r = self.cmd('CLRIO', state)
+        return r == ['CLRIO', 'OK']
 
     """
-    Sending pulse on specified pin of specified duration
+    Set oposite state on specified pin for specified duration
 
     C> PULSE 8 100
     E> PULSE OK
     """
     def pulse(self, pin, duration):
-        r = self.command('PULSE %d %d' % (pin, duration))
-        return r == 'PULSE OK'
+        r = self.cmd('PULSE', pin, duration)
+        return r == ['PULSE', 'OK']
+
+    """
+    Set data transmission (from PC to mainboard)
+
+    C> DATAUP 10011111111111110111111111111101
+    E> DATAUP OK
+    """
+    def dataup(self, state):
+        r = self.cmd('DATAUP', state)
+        return r == ['DATAUP', 'OK']
+
+    """
+    Set data transmission (from mainboard to PC)
+
+    C> DATADOWN 10011111111111110111111111111101
+    E> DATADOWN OK
+    """
+    def datadown(self, state):
+        r = self.cmd('DATADOWN', state)
+        return r == ['DATADOWN', 'OK']
+
+    """
+    Stop data transmission in both directions
+
+    C> DATASTOP
+    E> DATASTOP OK
+    """
+    def datastop(self):
+        r = self.cmd('DATASTOP')
+        return r == ['DATASTOP', 'OK']

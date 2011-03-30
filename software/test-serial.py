@@ -3,5 +3,5 @@
 from device import Device
 
 d = Device()
-d.open('')
+d.open('', '')
 d.close()
