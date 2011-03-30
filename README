@@ -6,8 +6,12 @@ http://brmlab.cz/
 Authors
 -------
 Tomislav "sargon" Arnaudov
+Karel "b00lean" Kyovsky
+Milan "biiter" Rossa
 Pavol "stick" Rusnak
 
 Software
 --------
-- required packages: python-qt4-devel
+- required packages:
+  * python-qt4-devel
+  * python-serial

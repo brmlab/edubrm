@@ -18,11 +18,11 @@ class Device:
         self.sdata.close()
         self.sctrl.close()
 
-    def cmd(self, *args):
+    def cmd(self, buf):
         if not self.sctrl.isOpen():
             return None
-        self.sctrl.write(' '.join(args) + '\n')
-        return self.sctrl.readline().strip().split(' ')
+        self.sctrl.write(buf+'\n')
+        return self.sctrl.readline().strip()
 
     def send(self, buf):
         if not self.sdata.isOpen():
@@ -42,7 +42,7 @@ class Device:
     E> PONG
     """
     def ping(self):
-        return self.cmd('PING') == ['PONG']
+        return self.cmd('PING') == 'PONG'
 
     """
     Read version
@@ -52,8 +52,8 @@ class Device:
     """
     def version(self):
         r = self.cmd('VERSION')
-        if r and r[0] == 'VERSION' and r[1] == 'EDUBRM':
-            return r[2]
+        if r and r.startswith('VERSION EDUBRM '):
+            return r[15:]
         return None
 
 # TODO: ANALOG PINS
@@ -76,8 +76,8 @@ class Device:
     """
     def cfgio(self):
         r = self.cmd('CFGIO')
-        if r and r[0] == 'CFGIO':
-            return r[1]
+        if r and r.startswith('CFGIO '):
+            return r[6:]
         return None
 
     """
@@ -87,8 +87,7 @@ class Device:
     E> CFGIO OK
     """
     def cfgio(self, state):
-        r = self.cmd('CFGIO', state)
-        return r == ['CFGIO', 'OK']
+        return self.cmd('CFGIO ' + state) == 'CFGIO OK'
 
     """
     Read all inputs
@@ -98,8 +97,8 @@ class Device:
     """
     def getio(self):
         r = self.cmd('GETIO')
-        if r and r[0] == 'GETIO':
-            return r[1]
+        if r and r.startswith('GETIO '):
+            return r[6:]
         return None
 
     """
@@ -109,8 +108,7 @@ class Device:
     E> SETIO OK
     """
     def setio(self, state):
-        r = self.cmd('SETIO', state)
-        return r == ['SETIO', 'OK']
+        return self.cmd('SETIO ' + state) == 'SETIO OK'
 
     """
     Set all outputs to logical 0
@@ -119,8 +117,7 @@ class Device:
     E> CLRIO OK
     """
     def clrio(self, state):
-        r = self.cmd('CLRIO', state)
-        return r == ['CLRIO', 'OK']
+        return self.cmd('CLRIO ' + state) == 'CLRIO OK'
 
     """
     Set oposite state on specified pin for specified duration
@@ -129,8 +126,7 @@ class Device:
     E> PULSE OK
     """
     def pulse(self, pin, duration):
-        r = self.cmd('PULSE', pin, duration)
-        return r == ['PULSE', 'OK']
+        return self.cmd('PULSE ' + str(pin) + ' ' + str(duration)) == 'PULSE OK'
 
     """
     Set data transmission (from PC to mainboard)
@@ -139,8 +135,7 @@ class Device:
     E> DATAUP OK
     """
     def dataup(self, state):
-        r = self.cmd('DATAUP', state)
-        return r == ['DATAUP', 'OK']
+        return self.cmd('DATAUP ' + state) == 'DATAUP OK'
 
     """
     Set data transmission (from mainboard to PC)
@@ -149,8 +144,7 @@ class Device:
     E> DATADOWN OK
     """
     def datadown(self, state):
-        r = self.cmd('DATADOWN', state)
-        return r == ['DATADOWN', 'OK']
+        return self.cmd('DATADOWN ' + state) == 'DATADOWN OK'
 
     """
     Stop data transmission in both directions
@@ -159,5 +153,4 @@ class Device:
     E> DATASTOP OK
     """
     def datastop(self):
-        r = self.cmd('DATASTOP')
-        return r == ['DATASTOP', 'OK']
+        return self.cmd('DATASTOP') == 'DATASTOP OK'
