@@ -1,6 +1,6 @@
 class Module():
 
-    group = ""
-    title = ""
-    board = 1
-    desc  = ""
+    title = ''
+
+    def start(self, area):
+        raise Exception('not implemented')
