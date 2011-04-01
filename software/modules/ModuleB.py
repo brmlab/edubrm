@@ -7,3 +7,6 @@ class ModuleB(Module):
     def setup(self, area):
         print 'setup B'
         print area
+
+    def run(self):
+        print 'run B'
