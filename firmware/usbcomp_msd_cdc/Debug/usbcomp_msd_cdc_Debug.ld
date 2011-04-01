@@ -3,7 +3,7 @@
 * (C) Code Red Technologies Ltd, 2008-10
 * Generated linker script file for LPC1343
 * Created from nxp_lpc13_c.ld (vLPCXpresso 3.8 (2 [Build 129] [31/01/2011] ))
-* By LPCXpresso 3.8.2 [Build 129] [31/01/2011]  on Fri Apr 01 20:01:18 CEST 2011
+* By LPCXpresso 3.8.2 [Build 129] [31/01/2011]  on Fri Apr 01 21:21:14 CEST 2011
 */
 
 

@@ -85,8 +85,7 @@ void commandReceived(char * receivedCommand) {
 	  sendToUSB("PONG\n");
 	  toggleLED();
   } else if (strcmp("VERSION", receivedCommand) == 0) {
-	  char verstr[32];
-	  sprintf(verstr, "%s\n", VERSION);
+	  sendToUSB(VERSION);
 	  toggleLED();
   }
 }
