@@ -1,6 +1,6 @@
 NAME = edubrm
 CFLAGS = -Wall -Werror -D__REDLIB__ -DDEBUG -D__CODE_RED -D__USE_CMSIS=CMSISv1p30_LPC13xx -O0 -g3 -Wall -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb
-LDFLAGS = -nostdlib -Xlinker -Map=obj/$(NAME).map --gc-sections -mcpu=cortex-m3 -mthumb -T obj/debug.ld
+LDFLAGS = -nostdlib -Xlinker -Map=obj/$(NAME).map --gc-sections -mcpu=cortex-m3 -mthumb -T obj/linker.ld
 LIST = $(shell cd src/ ; ls *.c)
 OBJS = $(addprefix obj/,$(LIST:.c=.o))
 SRCS = $(addprefix src/,$(LIST))
@@ -17,7 +17,7 @@ obj/$(NAME).bin: obj/$(NAME).axf
 	checksum -v obj/$(NAME).bin
 
 clean:
-	rm -f obj/*.o obj/*.{axf,bin,map}
+	rm -f obj/*.{axf,bin,map,o}
 
 deploy:
 	dfu-util -d 0471:df55 -c 0 -t 2048 -R -D /opt/LPCXpresso/bin/LPCXpressoWIN.enc || :

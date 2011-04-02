@@ -7,8 +7,8 @@
 */
 
 
-INCLUDE "obj/debug_lib.ld"
-INCLUDE "obj/debug_mem.ld"
+INCLUDE "obj/linker_lib.ld"
+INCLUDE "obj/linker_mem.ld"
 
 ENTRY(ResetISR)
 
