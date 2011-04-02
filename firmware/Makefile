@@ -17,7 +17,10 @@ obj/$(NAME).bin: obj/$(NAME).axf
 	checksum -v obj/$(NAME).bin
 
 clean:
-	rm -f obj/*.{axf,bin,map,o}
+	rm -f obj/*.axf
+	rm -f obj/*.bin
+	rm -f obj/*.map
+	rm -f obj/*.o
 
 deploy:
 	dfu-util -d 0471:df55 -c 0 -t 2048 -R -D /opt/LPCXpresso/bin/LPCXpressoWIN.enc || :
