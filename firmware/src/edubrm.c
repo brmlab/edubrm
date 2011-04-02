@@ -19,7 +19,7 @@
 
 #define mainLED_BIT 						( 7 )
 
-void VCOM_Brm2Usb(void) {
+void VCOM_Brm2Usb() {
 /*
   static char serBuf [USB_CDC_BUFSIZE];
   int  numBytesRead, numAvailByte;
@@ -28,7 +28,7 @@ void VCOM_Brm2Usb(void) {
   serBuf[0] = 'A';
   numBytesRead = 1;
 
-/*  ser_AvailChar (&numAvailByte);
+  ser_AvailChar (&numAvailByte);
   if (numAvailByte > 0) {
     if (CDC_DepInEmpty) {
       numBytesRead = ser_Read (&serBuf[0], &numAvailByte);
@@ -37,7 +37,6 @@ void VCOM_Brm2Usb(void) {
 
 	  USB_WriteEP (CDC_DEP_IN, (unsigned char *)&serBuf[0], numBytesRead);
     }
-/*
   }
 */
 
@@ -46,7 +45,7 @@ void VCOM_Brm2Usb(void) {
 static char cmdInbuffer[256];
 int cmdInbufferIndex = 0;
 
-int checkForCommand(void) {
+int checkForCommand() {
 	int i=0;
     for (i=0;i<cmdInbufferIndex;i++) {
   	  if (cmdInbuffer[i] == '\n' ) {
@@ -67,14 +66,14 @@ void disableLED() {
 	LPC_GPIO0->DIR |= ( 0x0 << mainLED_BIT );
 }
 
-void toggleLED( ){
+void toggleLED() {
 	  ulLEDState = !ulLEDState;
 	  LPC_GPIO0->MASKED_ACCESS[ ( 1 << mainLED_BIT) ] = ( ulLEDState << mainLED_BIT );
 
 }
 
 void sendToUSB(char *string) {
-	  USB_WriteEP (CDC_DEP_IN, string, strlen(string));
+	  USB_WriteEP (CDC_DEP_IN, (unsigned char *)string, strlen(string));
 }
 
 
@@ -92,7 +91,7 @@ void commandReceived(char * receivedCommand) {
 
 
 
-void VCOM_Usb2Brm(void) {
+void VCOM_Usb2Brm() {
   static char serBuf [32];
   int  numBytesToRead, numBytesRead, numAvailByte;
   int i=0;
