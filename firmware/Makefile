@@ -1,4 +1,4 @@
-CFLAGS  = -Wall -Werror -D__REDLIB__ -DDEBUG -D__CODE_RED -D__USE_CMSIS=CMSISv1p30_LPC13xx -Iinc -O0 -g3 -Wall -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb
+CFLAGS  = -Wall -Werror -D__REDLIB__ -DDEBUG -D__CODE_RED -D__USE_CMSIS=CMSISv1p30_LPC13xx -O0 -g3 -Wall -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb
 LDFLAGS = -nostdlib -Xlinker -Map=obj/edubrm.map --gc-sections -mcpu=cortex-m3 -mthumb -T obj/debug.ld
 LIST = $(shell cd src/ ; ls *.c)
 OBJS = $(addprefix obj/,$(LIST:.c=.o))
