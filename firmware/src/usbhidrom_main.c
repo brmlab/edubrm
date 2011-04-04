@@ -40,12 +40,15 @@ ROM ** rom = (ROM **)0x1fff1ff8;
 
 void GetInReport (uint8_t src[], uint32_t length)
 {
-    static int j = 0;
-    int i;
-    for (i = 0; i < INSIZE; ++i) {
-        src[i] = 'A' + i + j;
-    }
-    if (++j>32) j = 0;
+	int volatile reg = LPC_USB->CmdCode;
+	if (!(reg & (5<<8))) {
+		static int j = 0;
+		int i;
+		for (i = 0; i < INSIZE; ++i) {
+			src[i] = 'A' + i + j;
+		}
+		if (++j>32) j = 0;
+	}
 }
 
 void SetOutReport (uint8_t dst[], uint32_t length)
