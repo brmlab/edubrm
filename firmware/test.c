@@ -30,7 +30,8 @@ static const int PRODUCT_ID = 0x0003;
 
 // Values for bmRequestType in the Setup transaction's Data packet.
 
-static const int INTERRUPT_ENDPOINT_PACKET_SIZE = 16;
+static const int INSIZE = 8;
+static const int OUTSIZE = 2;
 static const int INTERFACE_NUMBER = 0;
 
 // Uses interrupt endpoint 1 IN and OUT:
@@ -108,16 +109,16 @@ int main(void)
 int exchange_input_and_output_reports_via_interrupt_transfers(libusb_device_handle *devh)
 {
 	int bytes_transferred;
-	unsigned char data_in[INTERRUPT_ENDPOINT_PACKET_SIZE-1];
-	unsigned char data_out[INTERRUPT_ENDPOINT_PACKET_SIZE-1];
+	unsigned char data_in[INSIZE-1];
+	unsigned char data_out[OUTSIZE-1];
 	int i = 0;;
 	int result = 0;;
 
 	// Store data in the output buffer for sending.
 
-	for (i=0;i<INTERRUPT_ENDPOINT_PACKET_SIZE; i++)
+	for (i=0;i<OUTSIZE; i++)
 	{
-		data_out[i]=0x40+i;
+		data_out[i] = 0x40+i;
 	}
 	// Write an Output report to the device.
 
@@ -125,14 +126,14 @@ int exchange_input_and_output_reports_via_interrupt_transfers(libusb_device_hand
 			devh,
 			INTERRUPT_OUT_ENDPOINT,
 			data_out,
-			INTERRUPT_ENDPOINT_PACKET_SIZE,
+			OUTSIZE,
 			&bytes_transferred,
 			TIMEOUT_MS);
 
 	if (result >= 0)
 	{
 	  	printf("Output report data sent via interrupt transfer:\n");
-	  	for(i = 0; i < INTERRUPT_ENDPOINT_PACKET_SIZE; i++)
+	  	for(i = 0; i < OUTSIZE; i++)
 	  	{
 	  		printf("%02x ",data_out[i]);
 	  	}
@@ -144,16 +145,16 @@ int exchange_input_and_output_reports_via_interrupt_transfers(libusb_device_hand
 				devh,
 				INTERRUPT_IN_ENDPOINT,
 				data_in,
-				INTERRUPT_ENDPOINT_PACKET_SIZE,
+				INSIZE,
 				&bytes_transferred,
 				TIMEOUT_MS);
 
 		if (result >= 0)
 		{
-			if (bytes_transferred == INTERRUPT_ENDPOINT_PACKET_SIZE)
+			if (bytes_transferred == INSIZE)
 			{
 			  	printf("Input report received via interrupt transfer:\n");
-			  	for(i = 0; i < INTERRUPT_ENDPOINT_PACKET_SIZE; i++)
+			  	for(i = 0; i < INSIZE; i++)
 			  	{
 			  		printf("%02x ",data_in[i]);
 			  	}

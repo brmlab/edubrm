@@ -32,24 +32,26 @@ USB_DEV_INFO DeviceInfo;
 HID_DEVICE_INFO HidDevInfo;
 ROM ** rom = (ROM **)0x1fff1ff8;
 
-/*
- *  Get HID Input Report -> InReport
- */
 
-static uint8_t buffer[64];
+/* --------------------------------------------------- */
+
+#define INSIZE  8
+#define OUTSIZE 2
 
 void GetInReport (uint8_t src[], uint32_t length)
 {
-    memcpy(src, buffer, length);
+    int i;
+    for (i = 0; i < INSIZE; ++i) {
+        src[i] = 'A' + i;
+    }
 }
 
-/*
- *  Set HID Output Report <- OutReport
- */
 void SetOutReport (uint8_t dst[], uint32_t length)
 {
-    memcpy(buffer, dst, length);
+    // TODO: parse dst
 }
+
+/* --------------------------------------------------- */
 
 int main (void)
 {
@@ -66,8 +68,8 @@ int main (void)
   HidDevInfo.idProduct = USB_PROD_ID;
   HidDevInfo.bcdDevice = USB_DEVICE; 
   HidDevInfo.StrDescPtr = (uint32_t)&USB_StringDescriptor[0];
-  HidDevInfo.InReportCount = 1;
-  HidDevInfo.OutReportCount = 1;
+  HidDevInfo.InReportCount = INSIZE;
+  HidDevInfo.OutReportCount = OUTSIZE;
   HidDevInfo.SampleInterval = 0x20;
   HidDevInfo.InReport = GetInReport;
   HidDevInfo.OutReport = SetOutReport;
