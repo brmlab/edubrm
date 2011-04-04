@@ -14,4 +14,4 @@ Software
 --------
 - required packages:
   * python-qt4-devel
-  * python-serial
+  * python-usb (>= 1.0)
