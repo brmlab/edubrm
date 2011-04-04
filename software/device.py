@@ -19,11 +19,9 @@ class Device:
                        custom_match = lambda e: \
                            usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN)
 
-# TODO: VERSION ?
 # TODO: PWM
 # TODO: SPI
-# TODO: SETPINS
-# TODO: CLEARPINS
+# TODO: SET/CLEAR PINS
 
     def state(self):
         # TODO: format?
