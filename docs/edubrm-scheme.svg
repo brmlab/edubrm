@@ -16,10 +16,36 @@
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="edubrm-scheme.svg"
    inkscape:export-filename="/home/stick/Desktop/edubrm-scheme.png"
-   inkscape:export-xdpi="89.849998"
-   inkscape:export-ydpi="89.849998">
+   inkscape:export-xdpi="90.045494"
+   inkscape:export-ydpi="90.045494">
   <defs
      id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Send"
+       style="overflow:visible;">
+      <path
+         id="path3878"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.2) rotate(180) translate(6,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Sstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Sstart"
+       style="overflow:visible">
+      <path
+         id="path3875"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.2) translate(6,0)" />
+    </marker>
     <marker
        inkscape:stockid="Arrow1Mend"
        orient="auto"
@@ -68,8 +94,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="405.59589"
-     inkscape:cy="339.75683"
+     inkscape:cx="439.21747"
+     inkscape:cy="455.0576"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -340,40 +366,40 @@
        id="path6268"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
-       inkscape:connection-start="#g6181"
-       inkscape:connection-start-point="d4"
        inkscape:connection-end="#rect6230"
-       inkscape:connection-end-point="d4" />
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-start="#g6181" />
     <path
        style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
        d="m 433.78697,692.72464 65.25154,21.83721"
        id="path6270"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
-       inkscape:connection-start="#g6217"
-       inkscape:connection-start-point="d4"
        inkscape:connection-end="#rect6230"
-       inkscape:connection-end-point="d4" />
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-start="#g6217" />
     <path
        style="fill:none;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart)"
        d="m 433.78697,666.44162 67.39437,-22.28795"
        id="path6272"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
-       inkscape:connection-start="#g6217"
-       inkscape:connection-start-point="d4"
        inkscape:connection-end="#rect6230-6"
-       inkscape:connection-end-point="d4" />
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-start="#g6217" />
     <path
-       style="fill:none;stroke:#008000;stroke-width:0.80000000999999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Mstart)"
+       style="fill:none;stroke:#008000;stroke-width:0.80000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Mstart)"
        d="m 433.78697,580.39126 67.39437,18.57329"
        id="path6274"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
-       inkscape:connection-start="#g6212"
-       inkscape:connection-start-point="d4"
        inkscape:connection-end="#rect6230-6"
-       inkscape:connection-end-point="d4" />
+       inkscape:connection-end-point="d4"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-start="#g6212" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
        d="m 323.7849,629.15959 30.99952,-26.23037"
@@ -382,8 +408,8 @@
        inkscape:connector-curvature="0"
        inkscape:connection-start="#g6199"
        inkscape:connection-start-point="d4"
-       inkscape:connection-end="#g6212"
-       inkscape:connection-end-point="d4" />
+       inkscape:connection-end-point="d4"
+       inkscape:connection-end="#g6212" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
        d="m 323.7849,679.50506 30.99952,0"
@@ -392,8 +418,8 @@
        inkscape:connector-curvature="0"
        inkscape:connection-start="#g6199"
        inkscape:connection-start-point="d4"
-       inkscape:connection-end="#g6217"
-       inkscape:connection-end-point="d4" />
+       inkscape:connection-end-point="d4"
+       inkscape:connection-end="#g6217" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4,1;stroke-dashoffset:0"
        id="rect7964"
@@ -423,5 +449,46 @@
          id="tspan8005"
          x="189.40361"
          y="611.93567">SPI</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1.05733001;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.17901618, 0.79475404;stroke-dashoffset:0;display:inline"
+       id="rect7964-1-4"
+       width="370.92368"
+       height="63.130013"
+       x="78.840866"
+       y="412.577"
+       rx="0.011975429"
+       ry="0.034279175" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="216.46625"
+       y="450.69424"
+       id="text3068"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3070"
+         x="216.46625"
+         y="450.69424">COMPUTER</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.97999999999999998;marker-start:url(#Arrow1Sstart);marker-end:url(#Arrow1Send)"
+       d="m 264.29,620.00586 0.0104,-144.29885"
+       id="path3072"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#g6199"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#rect7964-1-4"
+       inkscape:connection-end-point="d4" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="271.73105"
+       y="500.81888"
+       id="text4690"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4692"
+         x="271.73105"
+         y="500.81888">USB</tspan></text>
   </g>
 </svg>
