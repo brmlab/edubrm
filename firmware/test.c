@@ -30,10 +30,6 @@ static const int PRODUCT_ID = 0x0003;
 
 // Values for bmRequestType in the Setup transaction's Data packet.
 
-static const int CONTROL_REQUEST_TYPE_IN = LIBUSB_ENDPOINT_IN | LIBUSB_REQUEST_TYPE_CLASS | LIBUSB_RECIPIENT_INTERFACE;
-static const int CONTROL_REQUEST_TYPE_OUT = LIBUSB_ENDPOINT_OUT | LIBUSB_REQUEST_TYPE_CLASS | LIBUSB_RECIPIENT_INTERFACE;
-
-static const int CONTROL_ENDPOINT_PACKET_SIZE = 16;
 static const int INTERRUPT_ENDPOINT_PACKET_SIZE = 16;
 static const int INTERFACE_NUMBER = 0;
 
@@ -42,14 +38,6 @@ static const int INTERFACE_NUMBER = 0;
 static const int INTERRUPT_IN_ENDPOINT = 0x81;
 static const int INTERRUPT_OUT_ENDPOINT = 0x01;
 static const int TIMEOUT_MS = 5000;
-
-// From the HID spec:
-
-static const int HID_GET_REPORT = 0x01;
-static const int HID_SET_REPORT = 0x01;
-static const int HID_REPORT_TYPE_INPUT = 0x01;
-static const int HID_REPORT_TYPE_OUTPUT = 0x02;
-static const int HID_REPORT_TYPE_FEATURE = 0x03;
 
 int exchange_input_and_output_reports_via_interrupt_transfers(libusb_device_handle *devh);
 
@@ -120,8 +108,8 @@ int main(void)
 int exchange_input_and_output_reports_via_interrupt_transfers(libusb_device_handle *devh)
 {
 	int bytes_transferred;
-	char data_in[INTERRUPT_ENDPOINT_PACKET_SIZE-1];
-	char data_out[INTERRUPT_ENDPOINT_PACKET_SIZE-1];
+	unsigned char data_in[INTERRUPT_ENDPOINT_PACKET_SIZE-1];
+	unsigned char data_out[INTERRUPT_ENDPOINT_PACKET_SIZE-1];
 	int i = 0;;
 	int result = 0;;
 
@@ -144,7 +132,7 @@ int exchange_input_and_output_reports_via_interrupt_transfers(libusb_device_hand
 	if (result >= 0)
 	{
 	  	printf("Output report data sent via interrupt transfer:\n");
-	  	for(i = 0; i < CONTROL_ENDPOINT_PACKET_SIZE; i++)
+	  	for(i = 0; i < INTERRUPT_ENDPOINT_PACKET_SIZE; i++)
 	  	{
 	  		printf("%02x ",data_out[i]);
 	  	}
@@ -165,7 +153,7 @@ int exchange_input_and_output_reports_via_interrupt_transfers(libusb_device_hand
 			if (bytes_transferred == INTERRUPT_ENDPOINT_PACKET_SIZE)
 			{
 			  	printf("Input report received via interrupt transfer:\n");
-			  	for(i = 0; i < CONTROL_ENDPOINT_PACKET_SIZE; i++)
+			  	for(i = 0; i < INTERRUPT_ENDPOINT_PACKET_SIZE; i++)
 			  	{
 			  		printf("%02x ",data_in[i]);
 			  	}
