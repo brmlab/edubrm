@@ -29,5 +29,5 @@ deploy:
 	crt_emu_lpc11_13_nxp -g -2 -pLPC1343 -wire=winusb -flash-erase
 	crt_emu_lpc11_13_nxp -g -2 -pLPC1343 -wire=winusb -flash-load=obj/$(NAME).axf
 
-test:
+test: test.c
 	gcc test.c -o test -lusb-1.0

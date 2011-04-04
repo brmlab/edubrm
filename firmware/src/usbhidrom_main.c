@@ -22,6 +22,8 @@
 #include "rom_drivers.h"
 #include "config.h"
 
+#include <string.h>
+
 #define     EN_TIMER32_1    (1<<10)
 #define     EN_IOCON        (1<<16)
 #define     EN_USBREG       (1<<14)
@@ -34,11 +36,11 @@ ROM ** rom = (ROM **)0x1fff1ff8;
  *  Get HID Input Report -> InReport
  */
 
-volatile uint8_t buffer[8];
+static uint8_t buffer[64];
 
 void GetInReport (uint8_t src[], uint32_t length)
 {
-    src[0] = buffer[0];
+    memcpy(src, buffer, length);
 }
 
 /*
@@ -46,7 +48,7 @@ void GetInReport (uint8_t src[], uint32_t length)
  */
 void SetOutReport (uint8_t dst[], uint32_t length)
 {
-    buffer[0] = dst[0];
+    memcpy(buffer, dst, length);
 }
 
 int main (void)
