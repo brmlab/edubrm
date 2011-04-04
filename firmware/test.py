@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import usb
+import time
 
 usbdev = usb.core.find(idVendor=0x1fc9, idProduct=0x0003)
 
@@ -16,5 +17,6 @@ epi = usb.util.find_descriptor(
           custom_match = lambda e: \
               usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN)
 
-print epo.write('@A')
-print epi.read(8)
+for i in xrange(1024):
+    epo.write('@A')
+    epi.read(64)

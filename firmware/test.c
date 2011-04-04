@@ -30,7 +30,7 @@ static const int PRODUCT_ID = 0x0003;
 
 // Values for bmRequestType in the Setup transaction's Data packet.
 
-static const int INSIZE = 8;
+static const int INSIZE = 64;
 static const int OUTSIZE = 2;
 static const int INTERFACE_NUMBER = 0;
 

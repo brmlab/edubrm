@@ -35,15 +35,17 @@ ROM ** rom = (ROM **)0x1fff1ff8;
 
 /* --------------------------------------------------- */
 
-#define INSIZE  8
+#define INSIZE  64
 #define OUTSIZE 2
 
 void GetInReport (uint8_t src[], uint32_t length)
 {
+    static int j = 0;
     int i;
     for (i = 0; i < INSIZE; ++i) {
-        src[i] = 'A' + i;
+        src[i] = 'A' + i + j;
     }
+    if (++j>32) j = 0;
 }
 
 void SetOutReport (uint8_t dst[], uint32_t length)
