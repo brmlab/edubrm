@@ -34,6 +34,7 @@
 #include "system_LPC13xx.h"
 #endif
 
+
 //*****************************************************************************
 //
 // Forward declaration of the default handlers. These are aliased.
@@ -80,6 +81,13 @@ void PIOINT2_IRQHandler (void) ALIAS(IntDefaultHandler);
 void PIOINT1_IRQHandler (void) ALIAS(IntDefaultHandler);
 void PIOINT0_IRQHandler (void) ALIAS(IntDefaultHandler);
 void WAKEUP_IRQHandler  (void) ALIAS(IntDefaultHandler);
+
+//*****************************************************************************
+//
+// The entry point for the C++ library startup
+//
+//*****************************************************************************
+extern WEAK void __libc_init_array(void);
 
 //*****************************************************************************
 //
@@ -248,6 +256,12 @@ Reset_Handler(void)
           "        it      lt\n"
           "        strlt   r2, [r0], #4\n"
           "        blt     zero_loop");
+
+    //
+    // Call C++ library initialization, if present
+    //
+	if (__libc_init_array)
+		__libc_init_array() ;
 
 #ifdef __USE_CMSIS
 	SystemInit();

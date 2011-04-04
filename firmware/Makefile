@@ -1,6 +1,6 @@
 NAME = edubrm
 CFLAGS = -Wall -Werror -D__REDLIB__ -DDEBUG -D__CODE_RED -D__USE_CMSIS=CMSISv1p30_LPC13xx -O0 -g3 -Wall -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb
-LDFLAGS = -nostdlib -Xlinker -Map=obj/$(NAME).map --gc-sections -mcpu=cortex-m3 -mthumb -T obj/linker.ld
+LDFLAGS = -nostdlib -Xlinker -Map=obj/$(NAME).map --gc-sections -mcpu=cortex-m3 -mthumb -T obj/usb_buffer.ld
 LIST = $(shell cd src/ ; ls *.c)
 OBJS = $(addprefix obj/,$(LIST:.c=.o))
 SRCS = $(addprefix src/,$(LIST))
@@ -28,3 +28,6 @@ deploy:
 	crt_emu_lpc11_13_nxp -g -2 -pLPC1343 -wire=winusb -info-target
 	crt_emu_lpc11_13_nxp -g -2 -pLPC1343 -wire=winusb -flash-erase
 	crt_emu_lpc11_13_nxp -g -2 -pLPC1343 -wire=winusb -flash-load=obj/$(NAME).axf
+
+test:
+	gcc test.c -o test -lusb-1.0

@@ -3,7 +3,7 @@
  * @brief    CMSIS Cortex-M3 Device Peripheral Access Layer Source File
  *           for the NXP LPC13xx Device Series
  * @version  V1.02
- * @date     18. February 2010
+ * @date     21. October 2009
  *
  * @note
  * Copyright (C) 2009 ARM Limited. All rights reserved.
@@ -22,10 +22,6 @@
  *
  ******************************************************************************/
 
-// ******** Code Red **************
-// * Changed USBCLK_SETUP to 1
-// * Changed SYSPLLCTRL_Val to 0x25
-// ********************************
 
 #include <stdint.h>
 #include "LPC13xx.h"
@@ -142,12 +138,8 @@
 #define WDTOSCCTRL_Val        0x000000A0
 #define SYSPLLCLKSEL_Val      0x00000001
 #define SYSPLL_SETUP          1
-#define SYSPLLCTRL_Val        0x00000025
+#define SYSPLLCTRL_Val        0x00000005
 #define MAINCLKSEL_Val        0x00000003
-
-// ******** Code Red *********
-// * Changed USBCLK_SETUP to 1
-// ***************************
 #define USBCLK_SETUP          1
 #define USBPLL_SETUP          1
 #define USBPLLCLKSEL_Val      0x00000001
