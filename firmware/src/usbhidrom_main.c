@@ -70,7 +70,7 @@ int main (void)
   HidDevInfo.StrDescPtr = (uint32_t)&USB_StringDescriptor[0];
   HidDevInfo.InReportCount = INSIZE;
   HidDevInfo.OutReportCount = OUTSIZE;
-  HidDevInfo.SampleInterval = 0x20;
+  HidDevInfo.SampleInterval = 1;
   HidDevInfo.InReport = GetInReport;
   HidDevInfo.OutReport = SetOutReport;
 
