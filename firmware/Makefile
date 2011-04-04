@@ -24,7 +24,7 @@ clean:
 	rm -f test
 
 deploy:
-	dfu-util -d 0471:df55 -c 0 -t 2048 -R -D /usr/local/LPCXpresso/bin/LPCXpressoWIN.enc || :
+	dfu-util -d 0471:df55 -c 0 -t 2048 -R -D /usr/local/LPCXpresso/bin/LPCXpressoWIN.enc
 	sleep 1
 	crt_emu_lpc11_13_nxp -g -2 -pLPC1343 -wire=winusb -info-target
 	crt_emu_lpc11_13_nxp -g -2 -pLPC1343 -wire=winusb -flash-erase
