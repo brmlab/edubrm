@@ -26,7 +26,7 @@ const uint8_t USB_StringDescriptor[] = {
   /* Index 0x00: LANGID Codes */
   0x04,                              /* bLength */
   USB_STRING_DESCRIPTOR_TYPE,        /* bDescriptorType */
-  WBVAL(NXP_VID), /* US English */    /* wLANGID */
+  WBVAL(USB_VENDOR_ID), /* US English */    /* wLANGID */
   /* Index 0x04: Manufacturer */
   0x1C,                              /* bLength */
   USB_STRING_DESCRIPTOR_TYPE,        /* bDescriptorType */

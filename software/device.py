@@ -3,7 +3,7 @@ import usb
 class Device:
 
     VENDORID  = 0x1fc9
-    PRODUCTID = 0x0003
+    PRODUCTID = 0x1337
     INSIZE    = 64
     OUTSIZE   = 2
 

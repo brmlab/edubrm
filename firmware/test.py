@@ -3,7 +3,7 @@
 import usb
 import time
 
-usbdev = usb.core.find(idVendor=0x1fc9, idProduct=0x0003)
+usbdev = usb.core.find(idVendor = 0x1fc9, idProduct = 0x1337)
 
 usbdev.set_configuration()
 

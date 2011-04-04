@@ -26,7 +26,7 @@
 // Change these as needed to match idVendor and idProduct in your device's device descriptor.
 
 static const int VENDOR_ID = 0x1fc9;
-static const int PRODUCT_ID = 0x0003;
+static const int PRODUCT_ID = 0x1337;
 
 // Values for bmRequestType in the Setup transaction's Data packet.
 
