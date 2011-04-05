@@ -5,6 +5,8 @@ import time
 
 usbdev = usb.core.find(idVendor = 0x1fc9, idProduct = 0x1337)
 
+usbdev.detach_kernel_driver(0)
+
 usbdev.set_configuration()
 
 epo = usb.util.find_descriptor(
