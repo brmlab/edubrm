@@ -21,6 +21,7 @@
 #include "gpio.h"
 #include "rom_drivers.h"
 #include "config.h"
+#include "ssp.h"
 
 #include <string.h>
 
@@ -64,10 +65,14 @@ int main (void)
 	volatile int n;
 // Code Red Red Suite and LPCXpresso by Code Red both call SystemInit() in
 // the C startup code
-#ifndef __CODERED__
+//#ifndef __CODERED__
   SystemInit();
-#endif
-  
+//#endif
+
+/*
+  LPC_GPIO2->MASKED_ACCESS[0x01<<0] = 1 << 0;
+  SSPSend("BIITER", 6);
+*/
 
   HidDevInfo.idVendor = USB_VENDOR_ID;
   HidDevInfo.idProduct = USB_PROD_ID;
@@ -86,13 +91,15 @@ int main (void)
   LPC_SYSCON->SYSAHBCLKCTRL |= (EN_TIMER32_1 | EN_IOCON | EN_USBREG);
 
   /* Use pll and pin init function in rom */
-  (*rom)->pUSBD->init_clk_pins();   
+  (*rom)->pUSBD->init_clk_pins();
 
   /* insert a delay between clk init and usb init */
   for (n = 0; n < 75; n++) {}
 
   (*rom)->pUSBD->init(&DeviceInfo); /* USB Initialization */
   (*rom)->pUSBD->connect(TRUE);     /* USB Connect */
+
+  SSPInit();
 
   while (1)
 	  __WFI();
@@ -105,4 +112,11 @@ void USB_IRQHandler()
 #endif
 {
   (*rom)->pUSBD->isr();
+}
+
+void SSP_IRQHandler(void)
+{
+    while(1)
+    {
+    }
 }
