@@ -1,7 +1,7 @@
 #include "LPC13xx.h"
 #include "ssp.h"
 
-void SSPSend( char *buf, uint32_t Length )
+void SSPSend( const uint8_t *buf, uint32_t Length )
 {
   uint32_t i;
   uint8_t Dummy = Dummy;
@@ -27,6 +27,8 @@ void SSPSend( char *buf, uint32_t Length )
 }
 
 void SSPInit() {
+  uint32_t i;
+
 // reset peripherals
 LPC_SYSCON->PRESETCTRL |= (0x01<<0); // SSP reset de-asserted
 LPC_SYSCON->SYSAHBCLKCTRL |= (0x01<<11); // Enables clock for SSP.
@@ -56,14 +58,11 @@ LPC_IOCON->PIO0_2 |= 0x01;
 LPC_SSP->CR0 = 0x0007;
 LPC_SSP->CPSR = 0x02;
 
-
-
 LPC_IOCON->PIO0_7 = 0x00; // D/C^
 LPC_GPIO0->DIR |= 1 << 7;
 
 LPC_IOCON->PIO2_0 = 0x00; // RES^
 LPC_GPIO2->DIR |= 1 << 0;
-
 
 // SSP Enable with Master mode
 LPC_SSP->CR1 = (0x01<<1) | (0x00<<2);
@@ -74,58 +73,19 @@ NVIC_EnableIRQ(SSP_IRQn);
 /* enable all error related interrupts */
 LPC_SSP->IMSC = (0x1<<0) | (0x1<<1);
 
-int i;
-// reset
-//LPC_GPIO2->MASKED_ACCESS[0x01<<0] = 1 << 0;
-//  for (i = 0; i < 100; i++);
-//LPC_GPIO2->MASKED_ACCESS[0x01<<0] = 0 << 0;
-
-// select
-//LPC_GPIO0->MASKED_ACCESS[0x01<<2] = 0 << 2;
-//  for (i = 0; i < 100; i++);
-
 // command
 LPC_GPIO0->MASKED_ACCESS[0x01<<7] = 0 << 7;
-//  for (i = 0; i < 100; i++);
-/*
-SSPSend("\x21\xc8\x06\x13\x20\x0c", 6);
-// x:0 y:0
-SSPSend("\x20\x0c", 2);
-SSPSend("\x80\x40", 2);
+
+	  // send init
+	  SSPSend((uint8_t *)"\x21\xbf\x04\x14\x0c\x20\x0c", 7);
+	  // move to (0,0)
+	  SSPSend((uint8_t *)"\x80\x40", 2);
 
 // data
-LPC_GPIO0->MASKED_ACCESS[0x01<<7] = 0 << 7;
-// for (i = 0; i < 100; i++);
-
-SSPSend("\x21\xc8\x06\x13\x20\x0c", 6);
-  // x:0 y:0
-SSPSend("\x20\x0c", 2);
-
-
-LPC_GPIO0->MASKED_ACCESS[0x01<<7] = 0 << 7;
-*/
-	  SSPSend("\x21\xc8\x06\x13\x20\x0c", 6);
-	  SSPSend("\x80\x40", 2);
-	  //SSPSend("\x20\x0c", 2);
-
-
 LPC_GPIO0->MASKED_ACCESS[0x01<<7] = 1 << 7;
 
-  for (i=0;i<84*48;i++)
-	  SSPSend("\x00", 1);
-
-  SSPSend("\x00", 1);
-  SSPSend("\x00", 1);
-
-while (1){
-  SSPSend("\x7f\x49\x49\x49\x36\x00", 6); // B
-  SSPSend("\x7f\x09\x19\x29\x46\x00", 6); // R
-  SSPSend("\x7f\x02\x0c\x02\x7f\x00", 6); // M
-  SSPSend("\x7f\x40\x40\x40\x40\x00", 6); // L
-  SSPSend("\x7e\x11\x11\x11\x7e\x00", 6); // A
-  SSPSend("\x7f\x49\x49\x49\x36\x00", 6); // B
-  SSPSend("\x00\x00\x00\x00\x00\x00\x00", 7);
-  for(i=0;i<100000;i++);
-}
+// clear display
+  for (i=0;i<84*6;i++)
+    SSPSend((uint8_t *)"\x00", 1);
 
 }

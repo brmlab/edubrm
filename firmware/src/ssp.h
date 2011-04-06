@@ -108,7 +108,7 @@
 SSPReceive() will not be needed. */
 extern void SSP_IRQHandler (void);
 extern void SSPInit( void );
-extern void SSPSend( char *Buf, uint32_t Length );
+extern void SSPSend( const uint8_t *Buf, uint32_t Length );
 extern void SSPReceive( uint8_t *buf, uint32_t Length );
 
 #endif  /* __SSP_H__ */

@@ -22,8 +22,7 @@
 #include "rom_drivers.h"
 #include "config.h"
 #include "ssp.h"
-
-#include <string.h>
+#include "edubrm.h"
 
 #define     EN_TIMER32_1    (1<<10)
 #define     EN_IOCON        (1<<16)
@@ -33,53 +32,22 @@ USB_DEV_INFO DeviceInfo;
 HID_DEVICE_INFO HidDevInfo;
 ROM ** rom = (ROM **)0x1fff1ff8;
 
-
-/* --------------------------------------------------- */
-
-#define INSIZE  64
-#define OUTSIZE 2
-
-void GetInReport (uint8_t src[], uint32_t length)
-{
-	int volatile reg = LPC_USB->CmdCode;
-	if (!(reg & (5<<8))) {
-		static int j = 0;
-		int i;
-		for (i = 0; i < INSIZE; ++i) {
-			src[i] = 'A' + i + j;
-		}
-		if (++j>32) j = 0;
-	}
-}
-
-void SetOutReport (uint8_t dst[], uint32_t length)
-{
-    // TODO: parse dst
-}
-
-/* --------------------------------------------------- */
-
 int main (void)
 {
 	/* for delay loop */
-	volatile int n;
+	volatile uint32_t n;
 // Code Red Red Suite and LPCXpresso by Code Red both call SystemInit() in
 // the C startup code
 //#ifndef __CODERED__
   SystemInit();
 //#endif
 
-/*
-  LPC_GPIO2->MASKED_ACCESS[0x01<<0] = 1 << 0;
-  SSPSend("BIITER", 6);
-*/
-
   HidDevInfo.idVendor = USB_VENDOR_ID;
   HidDevInfo.idProduct = USB_PROD_ID;
   HidDevInfo.bcdDevice = USB_DEVICE; 
   HidDevInfo.StrDescPtr = (uint32_t)&USB_StringDescriptor[0];
-  HidDevInfo.InReportCount = INSIZE;
-  HidDevInfo.OutReportCount = OUTSIZE;
+  HidDevInfo.InReportCount = USB_INSIZE;
+  HidDevInfo.OutReportCount = USB_OUTSIZE;
   HidDevInfo.SampleInterval = 1;
   HidDevInfo.InReport = GetInReport;
   HidDevInfo.OutReport = SetOutReport;
@@ -99,6 +67,8 @@ int main (void)
   (*rom)->pUSBD->init(&DeviceInfo); /* USB Initialization */
   (*rom)->pUSBD->connect(TRUE);     /* USB Connect */
 
+  for (n = 0; n < 75; n++) {}
+
   SSPInit();
 
   while (1)
@@ -116,7 +86,7 @@ void USB_IRQHandler()
 
 void SSP_IRQHandler(void)
 {
-    while(1)
-    {
-    }
+//    while(1)
+//    {
+//    }
 }
