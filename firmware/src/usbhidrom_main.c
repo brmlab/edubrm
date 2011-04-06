@@ -42,6 +42,24 @@ int main (void)
   SystemInit();
 //#endif
 
+  LPC_IOCON->PIO1_6 &= ~0x07;
+  LPC_IOCON->PIO1_6 |= 0x02; // Selects function CT32B0_MAT0
+
+  LPC_SYSCON->SYSAHBCLKCTRL |= 1<<9; // Enables clock for 32-bit counter/timer 0.
+
+  LPC_TMR32B0->MR3 = 4294967; // period
+  LPC_TMR32B0->MR0 = 4294967/2; // duty
+
+  LPC_TMR32B0->MCR = 1<<10; // | 1<<9; // Reset on MR3: the TC will be reset if MR3 matches it.
+
+  LPC_TMR32B0->EMR = 3<<4; // Toggle the corresponding External Match bit/output.
+
+  LPC_TMR32B0->PWMC = 1<<0 | 1<<3; // enable pwn
+
+  NVIC_EnableIRQ(TIMER_32_0_IRQn);
+
+  LPC_TMR32B0->TCR = 1;
+
   HidDevInfo.idVendor = USB_VENDOR_ID;
   HidDevInfo.idProduct = USB_PROD_ID;
   HidDevInfo.bcdDevice = USB_DEVICE; 
