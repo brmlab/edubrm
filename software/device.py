@@ -11,7 +11,10 @@ class Device:
         usbdev = usb.core.find(idVendor = self.VENDORID, idProduct = self.PRODUCTID)
         if usbdev == None:
             raise Exception('EduBRM device not found')
-        usbdev.detach_kernel_driver(0)
+        try:
+            usbdev.detach_kernel_driver(0)
+        except:
+            pass
         usbdev.set_configuration()
         self.epo = usb.util.find_descriptor(usbdev.get_interface_altsetting(),
                        custom_match = lambda e: \
