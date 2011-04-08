@@ -241,7 +241,7 @@ typedef struct
   __IO uint32_t JTAG_TCK_PIO0_10;
   __IO uint32_t PIO1_10;
   __IO uint32_t PIO2_11;
-  __IO uint32_t JTAG_TDI_PIO0_11;
+  __IO uint32_t PIO0_11; // JTAG_TDI_PIO0_11
   __IO uint32_t JTAG_TMS_PIO1_0;
   __IO uint32_t JTAG_TDO_PIO1_1;
 

@@ -26,7 +26,7 @@ void GPIOIntDisable( uint32_t portNum, uint32_t bitPosi );
 uint32_t GPIOIntStatus( uint32_t portNum, uint32_t bitPosi );
 void GPIOIntClear( uint32_t portNum, uint32_t bitPosi );
 
-static LPC_GPIO_TypeDef (* const LPC_GPIO[4]) = { LPC_GPIO0, LPC_GPIO1, LPC_GPIO2, LPC_GPIO3 };
+//static LPC_GPIO_TypeDef (* const LPC_GPIO[4]) = { LPC_GPIO0, LPC_GPIO1, LPC_GPIO2, LPC_GPIO3 };
 
 /*****************************************************************************
 ** Function name:		GPIOSetValue
@@ -38,11 +38,13 @@ static LPC_GPIO_TypeDef (* const LPC_GPIO[4]) = { LPC_GPIO0, LPC_GPIO1, LPC_GPIO
 ** Returned value:		None
 **
 *****************************************************************************/
+/*
 static __INLINE void GPIOSetValue( uint32_t portNum, uint32_t bitPosi, uint32_t bitVal )
 {
 	LPC_GPIO[portNum]->MASKED_ACCESS[(1<<bitPosi)] = (bitVal<<bitPosi);
-}
 
+}
+*/
 /*****************************************************************************
 ** Function name:		GPIOSetDir
 **
@@ -52,6 +54,7 @@ static __INLINE void GPIOSetValue( uint32_t portNum, uint32_t bitPosi, uint32_t 
 ** Returned value:		None
 **
 *****************************************************************************/
+/*
 static __INLINE void GPIOSetDir( uint32_t portNum, uint32_t bitPosi, uint32_t dir )
 {
 	if(dir)
@@ -59,7 +62,7 @@ static __INLINE void GPIOSetDir( uint32_t portNum, uint32_t bitPosi, uint32_t di
 	else
 		LPC_GPIO[portNum]->DIR &= ~(1<<bitPosi);
 }
-
+*/
 #endif /* end __GPIO_H */
 /*****************************************************************************
 **                            End Of File

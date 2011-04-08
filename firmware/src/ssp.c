@@ -67,7 +67,7 @@ LPC_GPIO2->DIR |= 1 << 0;
 // SSP Enable with Master mode
 LPC_SSP->CR1 = (0x01<<1) | (0x00<<2);
 
-NVIC_EnableIRQ(SSP_IRQn);
+// NVIC_EnableIRQ(SSP_IRQn);
 
 /* Set SSPINMS registers to enable interrupts */
 /* enable all error related interrupts */
