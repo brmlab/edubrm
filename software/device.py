@@ -5,7 +5,9 @@ class Device:
     VENDORID  = 0x1fc9
     PRODUCTID = 0x1337
     INSIZE    = 64
-    OUTSIZE   = 2
+    OUTSIZE   = 64
+
+    polling = 0
 
     def __init__(self):
         usbdev = usb.core.find(idVendor = self.VENDORID, idProduct = self.PRODUCTID)
@@ -23,10 +25,40 @@ class Device:
                        custom_match = lambda e: \
                            usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN)
 
-# TODO: PWM
-# TODO: SPI
-# TODO: SET/CLEAR PINS
+    # sets pwm (which=1,2), (percent=16bit)
+    def pwm(self, which, percent):
+        self.epo.write('p' + chr(which) + chr(percent & 0xff) + chr(percent >> 8))
+
+    # sets dds (wave=square,sine,saw1,saw2), (freq=24bit)
+    def dds(self, wave, freq):
+        self.epo.write('d' + chr(wave) + chr(freq & 0xff) + chr((freq >> 8) & 0xff) + chr((freq >> 16) & 0xff))
+
+    # set opamp (which=1,2), (chan=6), (mult=16bit?)
+    def opamp(self, which, chan, mult):
+        self.epo.write('o' + chr(which) + chr(chan) + chr(mult & 0xff) + chr(percent >> 8))
+
+    # set switch (which=1..8), state=(0,1)
+    def switch(self, which, state):
+        self.epo.write('s' + chr(which) + (state and '\x01' or '\x00'))
+
+    # set all switches (states=8bit)
+    def switches(self, states):
+        self.epo.write('S' + chr(states))
+
+    # clear output (which=8bit)
+    def clrout(self, which):
+        self.epo.write('o' + chr(which))
+
+    # set output (which=8bit)
+    def setout(self, which):
+        self.epo.write('O' + chr(which))
+
+    def pollfreq(self, freq):
+        self.polling = freq
 
     def state(self):
-        # TODO: format?
-        return self.epi.read(self.INSIZE)
+        # 4x AD (16 bits) + 8x I
+        i = self.epi.read(self.INSIZE)
+        return (i[0] + i[1]<<8, i[2] + i[3]<<8, i[4] + i[5]<<8, i[6] + i[7]<<8,
+                i[8] & 0x01, i[8] & 0x02, i[8] & 0x04, i[8] & 0x08,
+                i[8] & 0x10, i[8] & 0x20, i[8] & 0x40, i[8] & 0x80)

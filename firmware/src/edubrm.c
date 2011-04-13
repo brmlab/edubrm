@@ -106,7 +106,7 @@ void PWMRun(void) {
 
 	LPC_TMR32B0->PWMC = 1<<0 | 1<<3; // enable pwn
 
-	LPC_TMR32B0->MCR |=  1<<9| 1<<0; NVIC_EnableIRQ(TIMER_32_0_IRQn);
+//	LPC_TMR32B0->MCR |=  1<<9| 1<<0; NVIC_EnableIRQ(TIMER_32_0_IRQn);
 
 	LPC_TMR32B0->TCR = 1;
 }
