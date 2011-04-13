@@ -25,23 +25,23 @@ class Device:
                        custom_match = lambda e: \
                            usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN)
 
-    # sets pwm (which=1,2), (percent=16bit)
-    def pwm(self, which, percent):
-        self.epo.write('p' + chr(which) + chr(percent & 0xff) + chr(percent >> 8))
+    # sets pwm (which=1,2), (duty=16bit)
+    def pwm(self, which, duty):
+        self.epo.write('p' + chr(which) + chr(duty & 0xff) + chr(duty >> 8))
 
-    # sets dds (wave=square,sine,saw1,saw2), (freq=24bit)
-    def dds(self, wave, freq):
-        self.epo.write('d' + chr(wave) + chr(freq & 0xff) + chr((freq >> 8) & 0xff) + chr((freq >> 16) & 0xff))
+    # sets dds (wave=square,sine,saw1,saw2), (freq=32bit)
+    def dds(self, wavetype, freq):
+        self.epo.write('d' + chr(wavetype) + chr(freq & 0xff) + chr((freq >> 8) & 0xff) + chr((freq >> 16) & 0xff) + chr(freq >> 24))
 
-    # set opamp (which=1,2), (chan=6), (mult=16bit?)
+    # set opamp (which=1,2), (chan=6), (mult=16bit)
     def opamp(self, which, chan, mult):
-        self.epo.write('o' + chr(which) + chr(chan) + chr(mult & 0xff) + chr(percent >> 8))
+        self.epo.write('m' + chr(which) + chr(chan) + chr(mult & 0xff) + chr(mult >> 8))
 
     # set switch (which=1..8), state=(0,1)
     def switch(self, which, state):
         self.epo.write('s' + chr(which) + (state and '\x01' or '\x00'))
 
-    # set all switches (states=8bit)
+    # set all switches (which=8bit)
     def switches(self, states):
         self.epo.write('S' + chr(states))
 

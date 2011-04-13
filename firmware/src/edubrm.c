@@ -3,58 +3,64 @@
 #include "ssp.h"
 #include "adc.h"
 
-#include "chars.h"
-#include "pbjt.h"
-
 void GetInReport (uint8_t src[], uint32_t length)
 {
+	uint8_t i;
 	uint32_t volatile reg = LPC_USB->CmdCode;
 	if (reg & (5<<8)) return;
 
-	static int j = 0;
-	int i;
-	for (i = 0; i < USB_INSIZE; ++i) {
-		src[i] = 'A' + i + j;
+	for (i=0; i<4; ++i) {
+		uint32_t v = ADCRead(i);
+		src[i*2  ] = v & 0xff;
+		src[i*2+1] = (v>>8) & 0xff;
 	}
-	if (++j>32) j = 0;
+	// TODO: fix the following - replace IP[i] with real value if input pin (I)
+	// src[8] = IP[0] + (IP[1]<<1) + (IP[2]<<2) + (IP[3]<<3) + (IP[4]<<4) + (IP[5]<<5) + (IP[6]<<6) + (IP[7]<<7);
 }
 
 void SetOutReport (uint8_t dst[], uint32_t length)
 {
-	uint32_t i;
+	uint8_t which, wavetype, chan, states;
+	uint16_t duty, mult;
+	uint32_t freq;
+
 	switch (dst[0]) {
-
-		case 0x00: // send chars to display
-			for (i = 1; dst[i] != 0; ++i) {
-				if (dst[i] >= 0x20 && dst[i] <= 0x7F)
-				SSPSend((uint8_t *)ASCII[dst[i]-0x20], 5);
-				SSPSend((uint8_t *)"\x00", 1);
+		case 'p':
+			which = dst[1];
+			duty = dst[2] + (dst[3]<<8);
+			// TODO: set PWM (which) to (duty)
+			break;
+		case 'd':
+			wavetype = dst[1];
+			freq = dst[2] + (dst[3]<<8) + (dst[4]<<16) + (dst[5]<<24);
+			// TODO: set DDS to (wavetype) of (freq) Hz
+			break;
+		case 'm':
+			which = dst[1];
+			chan = dst[2];
+			mult = dst[3] + (dst[4]<<8);
+			// TODO: set opamp (which) on channel (chan) with multiplicator (mult)
+			break;
+		case 's':
+			which = dst[1];
+			if (dst[2]) {
+				// TODO: set switch (which) to on
+			} else {
+				// TODO: set switch (which) to off
 			}
 			break;
-
-		case 0x01: // clear screen (white)
-			for (i = 0; i < 84*6; ++i) {
-				SSPSend((uint8_t *)"\x00", 1);
-			}
+		case 'S':
+			states = dst[1];
+			// TODO: set switches to states
 			break;
-
-		case 0x02: // clear screen (black)
-			for (i = 0; i < 84*6; ++i) {
-				SSPSend((uint8_t *)"\xFF", 1);
-			}
+		case 'o':
+			which = dst[1];
+			// TODO: set output pins to 0 where indicated by (which)
 			break;
-
-		case 0x03:
-			switch (dst[1]) {
-				case 0: SSPSend(pbjt1, 504); break;
-				case 1: SSPSend(pbjt2, 504); break;
-				case 2: SSPSend(pbjt3, 504); break;
-				case 3: SSPSend(pbjt4, 504); break;
-				case 4: SSPSend(pbjt5, 504); break;
-				case 5: SSPSend(pbjt6, 504); break;
-				case 6: SSPSend(pbjt7, 504); break;
-				case 7: SSPSend(pbjt8, 504); break;
-			}
+		case 'O':
+			which = dst[1];
+			// TODO: set output pins to 1 where indicated by (which)
+			break;
 	}
 }
 
