@@ -22,7 +22,8 @@ class ModuleButton(QPushButton):
         self.form.ui.btnExit.hide()
         self.form.ui.btnBack.show()
         self.form.ui.lblTitle.setText(self.mod.title)
-        self.mod.setup(self.form.ui.areaModuleContents)
+        self.form.ui.areaModule.setWidget(self.mod.widget)
+        self.form.ui.areaModule.show()
 
 class Main(QMainWindow):
     def __init__(self):

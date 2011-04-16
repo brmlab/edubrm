@@ -1,14 +1,19 @@
-from module import Module
+from PyQt4.QtGui import QWidget
+from PyQt4.QtCore import pyqtSlot
 from ModuleDebugUi import Ui_ModuleDebug
 
-class ModuleDebug(Module):
+class ModuleDebugWidget(QWidget):
 
-    title = 'Debug'
-
-    def setup(self, area):
-        print 'setup Debug'
+    def __init__(self):
+        QWidget.__init__(self)
         self.ui = Ui_ModuleDebug()
-        self.ui.setupUi(area)
+        self.ui.setupUi(self)
+
+class ModuleDebug():
+
+    def __init__(self):
+        self.title = 'Debug'
+        self.widget = ModuleDebugWidget()
 
     def run(self):
         print 'run Debug'

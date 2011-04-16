@@ -1,11 +1,8 @@
-from module import Module
+class ModuleA():
 
-class ModuleA(Module):
-
-    title = 'Acko'
-
-    def setup(self, area):
-        print 'setup A'
+    def __init__(self):
+        self.title = 'A'
+        self.widget = None
 
     def run(self):
         print 'run A'
