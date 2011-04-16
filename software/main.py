@@ -48,7 +48,7 @@ class Main(QMainWindow):
 
     @pyqtSlot()
     def on_btnAbout_clicked(self):
-        box = QMessageBox(QMessageBox.NoIcon, "About EduBRM", "EduBRM by Hackerspace brmlab\n\nhttp://brmlab.cz/\n\nSee README for more information.", QMessageBox.Ok)
+        box = QMessageBox(QMessageBox.NoIcon, "About EduBRM", "EduBRM by Hackerspace brmlab\n\nhttp://brmlab.cz/\n\nSee README for more information.", QMessageBox.Ok, self)
         box.setIconPixmap(QPixmap( ":/icons/icon.png"))
         box.exec_()
 
