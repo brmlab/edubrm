@@ -9,13 +9,13 @@ void GetInReport (uint8_t src[], uint32_t length)
 	uint32_t volatile reg = LPC_USB->CmdCode;
 	if (reg & (5<<8)) return;
 
-	for (i=0; i<4; ++i) {
+	for (i=0; i<6; ++i) {
 		uint32_t v = ADCRead(i);
 		src[i*2  ] = v & 0xff;
 		src[i*2+1] = (v>>8) & 0xff;
 	}
-	// TODO: fix the following - replace IP[i] with real value if input pin (I)
-	// src[8] = IP[0] + (IP[1]<<1) + (IP[2]<<2) + (IP[3]<<3) + (IP[4]<<4) + (IP[5]<<5) + (IP[6]<<6) + (IP[7]<<7);
+	// TODO: fix the following - replace IP[i] with real value of input pin (I)
+	// src[12] = IP[0] + (IP[1]<<1) + (IP[2]<<2);
 }
 
 void SetOutReport (uint8_t dst[], uint32_t length)
@@ -32,33 +32,30 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			break;
 		case 'd':
 			wavetype = dst[1];
-			freq = dst[2] + (dst[3]<<8) + (dst[4]<<16) + (dst[5]<<24);
-			// TODO: set DDS to (wavetype) of (freq) Hz
+			// TODO: set DDS to (wavetype)
+			break;
+		case 'D':
+			freq = dst[1] + (dst[2]<<8) + (dst[3]<<16) + (dst[4]<<24);
+			// TODO: set DDS to (freq) Hz
 			break;
 		case 'm':
 			which = dst[1];
-			mult = dst[2] + (dst[3]<<8);
-			// TODO: set opamp (which) on channel (chan) with multiplicator (mult)
+			chan = dst[2];
+			gain = dst[3];
+			// TODO: set opamp (which) on channel (chan) with gain (gain)
 			break;
 		case 's':
-			which = dst[1];
-			if (dst[2]) {
-				// TODO: set switch (which) to on
-			} else {
-				// TODO: set switch (which) to off
-			}
-			break;
-		case 'S':
 			states = dst[1];
 			// TODO: set switches to states
 			break;
-		case 'o':
-			which = dst[1];
-			// TODO: set output pins to 0 where indicated by (which)
+		case 'P':
+			states = dst[1];
+			// TODO: set pins to states
 			break;
-		case 'O':
-			which = dst[1];
-			// TODO: set output pins to 1 where indicated by (which)
+		case 'o':
+			which = dst[1] >> 1;
+			state = dst[1] & 0x01;
+			// TODO: set output pins (which) to state (state)
 			break;
 	}
 }

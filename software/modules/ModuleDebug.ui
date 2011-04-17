@@ -116,7 +116,7 @@
     <rect>
      <x>190</x>
      <y>10</y>
-     <width>201</width>
+     <width>211</width>
      <height>131</height>
     </rect>
    </property>
@@ -126,7 +126,7 @@
    <widget class="QSpinBox" name="lineDDS">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>100</x>
       <y>90</y>
       <width>101</width>
       <height>31</height>
@@ -136,13 +136,16 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="text" stdset="0">
-     <string>0</string>
+     <string>1</string>
+    </property>
+    <property name="minimum">
+     <number>1</number>
     </property>
     <property name="maximum">
-     <number>16777216</number>
+     <number>50000000</number>
     </property>
     <property name="value">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="maxLength" stdset="0">
      <number>8</number>
@@ -151,14 +154,17 @@
    <widget class="QDial" name="dialDDS">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>100</x>
       <y>10</y>
       <width>101</width>
       <height>81</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
     <property name="maximum">
-     <number>16777216</number>
+     <number>50000000</number>
     </property>
     <property name="pageStep">
      <number>100</number>
@@ -169,7 +175,7 @@
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>71</width>
+      <width>81</width>
       <height>26</height>
      </rect>
     </property>
@@ -185,7 +191,7 @@
      <rect>
       <x>10</x>
       <y>50</y>
-      <width>71</width>
+      <width>81</width>
       <height>26</height>
      </rect>
     </property>
@@ -198,7 +204,7 @@
      <rect>
       <x>10</x>
       <y>70</y>
-      <width>71</width>
+      <width>81</width>
       <height>26</height>
      </rect>
     </property>
@@ -211,7 +217,7 @@
      <rect>
       <x>10</x>
       <y>90</y>
-      <width>71</width>
+      <width>81</width>
       <height>26</height>
      </rect>
     </property>
@@ -225,8 +231,8 @@
     <rect>
      <x>10</x>
      <y>150</y>
-     <width>171</width>
-     <height>131</height>
+     <width>151</width>
+     <height>111</height>
     </rect>
    </property>
    <property name="title">
@@ -235,218 +241,581 @@
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
-   <widget class="QSpinBox" name="lineAMP1">
+   <widget class="QComboBox" name="comboAMP1c">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>90</y>
-      <width>71</width>
+      <y>30</y>
+      <width>61</width>
       <height>31</height>
      </rect>
     </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-    <property name="text" stdset="0">
-     <string>0</string>
-    </property>
-    <property name="maximum">
-     <number>65535</number>
-    </property>
-    <property name="value">
-     <number>0</number>
-    </property>
-    <property name="maxLength" stdset="0">
-     <number>5</number>
-    </property>
+    <item>
+     <property name="text">
+      <string>ch 1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 6</string>
+     </property>
+    </item>
    </widget>
-   <widget class="QSpinBox" name="lineAMP2">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>90</y>
-      <width>71</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-    <property name="text" stdset="0">
-     <string>0</string>
-    </property>
-    <property name="maximum">
-     <number>65535</number>
-    </property>
-    <property name="value">
-     <number>0</number>
-    </property>
-    <property name="maxLength" stdset="0">
-     <number>5</number>
-    </property>
-   </widget>
-   <widget class="QDial" name="dialAMP2">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>20</y>
-      <width>71</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <number>65535</number>
-    </property>
-    <property name="pageStep">
-     <number>256</number>
-    </property>
-   </widget>
-   <widget class="QDial" name="dialAMP1">
+   <widget class="QComboBox" name="comboAMP2c">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
-      <width>71</width>
-      <height>71</height>
+      <y>70</y>
+      <width>61</width>
+      <height>31</height>
      </rect>
     </property>
-    <property name="maximum">
-     <number>65535</number>
+    <item>
+     <property name="text">
+      <string>ch 1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>ch 6</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboAMP1g">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>30</y>
+      <width>61</width>
+      <height>31</height>
+     </rect>
     </property>
-    <property name="pageStep">
-     <number>256</number>
+    <item>
+     <property name="text">
+      <string>* 1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 8</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 10</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 16</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 32</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboAMP2g">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>70</y>
+      <width>61</width>
+      <height>31</height>
+     </rect>
     </property>
+    <item>
+     <property name="text">
+      <string>* 1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 8</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 10</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 16</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>* 32</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QGroupBox" name="groupOut">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>170</x>
      <y>150</y>
-     <width>201</width>
-     <height>61</height>
+     <width>151</width>
+     <height>111</height>
     </rect>
    </property>
    <property name="title">
-    <string>Outputs</string>
+    <string>IO Pins (up=O, dn=I)</string>
    </property>
-   <widget class="QCheckBox" name="checkOut7">
+   <widget class="QPushButton" name="pushPin1">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>21</width>
-      <height>26</height>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>1</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut6">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>21</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkOut5">
+   <widget class="QPushButton" name="pushPin2">
     <property name="geometry">
      <rect>
       <x>50</x>
       <y>30</y>
-      <width>21</width>
-      <height>26</height>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>2</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut4">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>30</y>
-      <width>21</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkOut3">
+   <widget class="QPushButton" name="pushPin3">
     <property name="geometry">
      <rect>
       <x>90</x>
       <y>30</y>
-      <width>21</width>
-      <height>26</height>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>3</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut2">
+   <widget class="QPushButton" name="pushOut1">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>30</y>
-      <width>21</width>
-      <height>26</height>
+      <x>10</x>
+      <y>70</y>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>O</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut1">
+   <widget class="QPushButton" name="pushOut2">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>30</y>
-      <width>21</width>
-      <height>26</height>
+      <x>50</x>
+      <y>70</y>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>O</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut0">
+   <widget class="QPushButton" name="pushOut3">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>30</y>
-      <width>21</width>
-      <height>26</height>
+      <x>90</x>
+      <y>70</y>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>O</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QGroupBox" name="groupSwitches">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>200</y>
-     <width>161</width>
-     <height>21</height>
+     <x>330</x>
+     <y>150</y>
+     <width>141</width>
+     <height>111</height>
     </rect>
    </property>
-   <property name="text">
-    <string> 7   6   5  4   3   2   1   0</string>
+   <property name="title">
+    <string>Switches</string>
    </property>
+   <widget class="QPushButton" name="pushSwitch1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushSwitch2">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>2</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushSwitch3">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>30</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>3</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushSwitch6">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>70</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>6</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushSwitch5">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>70</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>5</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushSwitch4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>4</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupInput">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>270</y>
+     <width>461</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Input</string>
+   </property>
+   <widget class="QDial" name="dialInputFreq">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>81</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>999</number>
+    </property>
+    <property name="pageStep">
+     <number>10</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="lineInputFreq">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="text" stdset="0">
+     <string>1</string>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>999</number>
+    </property>
+    <property name="value">
+     <number>1</number>
+    </property>
+    <property name="maxLength" stdset="0">
+     <number>3</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelAD1">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>20</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AD1: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelAD2">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>40</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AD2: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelAD3">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>60</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AD3: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelAD4">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>80</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AD4: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelAD5">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>100</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AD5: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelAD6">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>120</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AD6: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelIO2">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>40</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IO2: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelIO3">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>60</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IO3: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelIO1">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>20</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IO1: 0</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
@@ -516,70 +885,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>dialAMP1</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lineAMP1</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>55</x>
-     <y>205</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>55</x>
-     <y>255</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>dialAMP2</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lineAMP2</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>135</x>
-     <y>205</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>135</x>
-     <y>255</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lineAMP1</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>dialAMP1</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>55</x>
-     <y>255</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>55</x>
-     <y>205</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lineAMP2</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>dialAMP2</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>135</x>
-     <y>255</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>135</x>
-     <y>205</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>dialDDS</sender>
    <signal>valueChanged(int)</signal>
    <receiver>lineDDS</receiver>
@@ -608,6 +913,38 @@
     <hint type="destinationlabel">
      <x>330</x>
      <y>60</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialInputFreq</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lineInputFreq</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>340</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>395</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineInputFreq</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>dialInputFreq</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>340</y>
     </hint>
    </hints>
   </connection>

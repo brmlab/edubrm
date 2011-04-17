@@ -27,33 +27,33 @@ class Device:
     def pwm(self, which, duty):
         self.epo.write('p' + chr(which) + chr(duty & 0xff) + chr(duty >> 8))
 
-    # sets dds (wave=square,sine,saw1,saw2), (freq=32bit)
-    def dds(self, wavetype, freq):
-        self.epo.write('d' + chr(wavetype) + chr(freq & 0xff) + chr((freq >> 8) & 0xff) + chr((freq >> 16) & 0xff) + chr(freq >> 24))
+    # sets ddswave (wave=square,sine,saw1,saw2)
+    def ddswave(self, wavetype):
+        self.epo.write('d' + chr(wavetype))
 
-    # set opamp (which=1,2), (mult=16bit)
-    def opamp(self, which, mult):
-        self.epo.write('m' + chr(which) + chr(mult & 0xff) + chr(mult >> 8))
+    # sets ddsfreq (freq=32bit)
+    def ddsfreq(self, freq):
+        self.epo.write('D' + chr(freq & 0xff) + chr((freq >> 8) & 0xff) + chr((freq >> 16) & 0xff) + chr(freq >> 24))
 
-    # set switch (which=1..8), state=(0,1)
-    def switch(self, which, state):
-        self.epo.write('s' + chr(which) + (state and '\x01' or '\x00'))
+    # set opamp (which=1,2), (chan=1..6), (gain=1, 2, 4, 5, 8, 10, 16, 32)
+    def opamp(self, which, chan, gain):
+        self.epo.write('m' + chr(which) + chr(chan) + chr(gain))
 
-    # set all switches (which=8bit)
+    # set all switches (states=6bit)
     def switches(self, states):
-        self.epo.write('S' + chr(states))
+        self.epo.write('s' + chr(states))
 
-    # clear output (which=8bit)
-    def clrout(self, which):
-        self.epo.write('o' + chr(which))
+    # set pins state (states=3bit) (1 = input, 0 = output)
+    def setpins(self, states):
+        self.epo.write('P' + chr(states))
 
-    # set output (which=8bit)
-    def setout(self, which):
-        self.epo.write('O' + chr(which))
+    # set output (which=1,2,3), (state=0,1)
+    def setout(self, which, state):
+        self.epo.write('o' + chr(which<<1 + state))
 
-    def state(self):
-        # 4x AD (16 bits) + 8x I
+    def read(self):
+        # 6x AD (16 bits) + 3 x I
         i = self.epi.read(self.INSIZE)
-        return (i[0] + i[1]<<8, i[2] + i[3]<<8, i[4] + i[5]<<8, i[6] + i[7]<<8,
-                i[8] & 0x01, i[8] & 0x02, i[8] & 0x04, i[8] & 0x08,
-                i[8] & 0x10, i[8] & 0x20, i[8] & 0x40, i[8] & 0x80)
+        return (i[0] + i[1]<<8, i[2] + i[3]<<8, i[4] + i[5]<<8,
+                i[6] + i[7]<<8, i[9] + i[9]<<8, i[10] + i[11]<<8,
+                i[12] & 0x01, (i[12] & 0x02) >> 1, (i[12] & 0x04) >> 2)
