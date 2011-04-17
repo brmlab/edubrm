@@ -163,7 +163,10 @@ class ModuleDebugWidget(QWidget):
 #        self.dev.setout(3, checked and 1 or 0)
         print 'out3:', checked and 1 or 0
 
-
+    @pyqtSlot(int)
+    def on_dialInputFreq_valueChanged(self, val):
+# TODO: change sampling rate to (val) freq
+        print 'inputfreq:', val
 
 class ModuleDebug():
 
