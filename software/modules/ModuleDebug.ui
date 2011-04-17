@@ -330,7 +330,7 @@
    <property name="title">
     <string>Outputs</string>
    </property>
-   <widget class="QCheckBox" name="checkOut8">
+   <widget class="QCheckBox" name="checkOut7">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -343,7 +343,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut7">
+   <widget class="QCheckBox" name="checkOut6">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -356,7 +356,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut6">
+   <widget class="QCheckBox" name="checkOut5">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -369,7 +369,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut5">
+   <widget class="QCheckBox" name="checkOut4">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -382,7 +382,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut4">
+   <widget class="QCheckBox" name="checkOut3">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -395,7 +395,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut3">
+   <widget class="QCheckBox" name="checkOut2">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -408,7 +408,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut2">
+   <widget class="QCheckBox" name="checkOut1">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -421,7 +421,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkOut1">
+   <widget class="QCheckBox" name="checkOut0">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -445,7 +445,7 @@
     </rect>
    </property>
    <property name="text">
-    <string> 8   7   6  5   4   3   2   1</string>
+    <string> 7   6   5  4   3   2   1   0</string>
    </property>
   </widget>
  </widget>
