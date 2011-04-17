@@ -13,162 +13,603 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="labelPWM">
+  <widget class="QGroupBox" name="groupPWM">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>151</width>
-     <height>21</height>
+     <width>171</width>
+     <height>131</height>
     </rect>
    </property>
-   <property name="text">
+   <property name="title">
     <string>PWM</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
+   <widget class="QSpinBox" name="linePWM1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="text" stdset="0">
+     <string>0</string>
+    </property>
+    <property name="maximum">
+     <number>65535</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="maxLength" stdset="0">
+     <number>5</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="linePWM2">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>90</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="text" stdset="0">
+     <string>0</string>
+    </property>
+    <property name="maximum">
+     <number>65535</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="maxLength" stdset="0">
+     <number>5</number>
+    </property>
+   </widget>
+   <widget class="QDial" name="dialPWM2">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>20</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>65535</number>
+    </property>
+    <property name="pageStep">
+     <number>256</number>
+    </property>
+   </widget>
+   <widget class="QDial" name="dialPWM1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>65535</number>
+    </property>
+    <property name="pageStep">
+     <number>256</number>
+    </property>
+   </widget>
   </widget>
-  <widget class="QDial" name="dialPWM1">
+  <widget class="QGroupBox" name="groupDDS">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>30</y>
-     <width>71</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="maximum">
-    <number>65535</number>
-   </property>
-   <property name="pageStep">
-    <number>256</number>
-   </property>
-  </widget>
-  <widget class="QDial" name="dialPWM2">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>30</y>
-     <width>71</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="maximum">
-    <number>65535</number>
-   </property>
-   <property name="pageStep">
-    <number>256</number>
-   </property>
-  </widget>
-  <widget class="QSpinBox" name="linePWM1">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>100</y>
-     <width>71</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-   </property>
-   <property name="text" stdset="0">
-    <string>0</string>
-   </property>
-   <property name="maximum">
-    <number>65535</number>
-   </property>
-   <property name="value">
-    <number>0</number>
-   </property>
-   <property name="maxLength" stdset="0">
-    <number>5</number>
-   </property>
-  </widget>
-  <widget class="QSpinBox" name="linePWM2">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>100</y>
-     <width>71</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-   </property>
-   <property name="text" stdset="0">
-    <string>0</string>
-   </property>
-   <property name="maximum">
-    <number>65535</number>
-   </property>
-   <property name="value">
-    <number>0</number>
-   </property>
-   <property name="maxLength" stdset="0">
-    <number>5</number>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelDDS">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
+     <x>190</x>
      <y>10</y>
-     <width>151</width>
+     <width>201</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>DDS</string>
+   </property>
+   <widget class="QSpinBox" name="lineDDS">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>90</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="text" stdset="0">
+     <string>0</string>
+    </property>
+    <property name="maximum">
+     <number>16777216</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="maxLength" stdset="0">
+     <number>8</number>
+    </property>
+   </widget>
+   <widget class="QDial" name="dialDDS">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>10</y>
+      <width>101</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>16777216</number>
+    </property>
+    <property name="pageStep">
+     <number>100</number>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioSine">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>71</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sine</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioSquare">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>71</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Square</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioSaw">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>71</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Saw</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioInvSaw">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>71</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>InvSaw</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupAMP">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>171</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>OPAMP</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <widget class="QSpinBox" name="lineAMP1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="text" stdset="0">
+     <string>0</string>
+    </property>
+    <property name="maximum">
+     <number>65535</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="maxLength" stdset="0">
+     <number>5</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="lineAMP2">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>90</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="text" stdset="0">
+     <string>0</string>
+    </property>
+    <property name="maximum">
+     <number>65535</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="maxLength" stdset="0">
+     <number>5</number>
+    </property>
+   </widget>
+   <widget class="QDial" name="dialAMP2">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>20</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>65535</number>
+    </property>
+    <property name="pageStep">
+     <number>256</number>
+    </property>
+   </widget>
+   <widget class="QDial" name="dialAMP1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>71</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>65535</number>
+    </property>
+    <property name="pageStep">
+     <number>256</number>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupOut">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>150</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Outputs</string>
+   </property>
+   <widget class="QCheckBox" name="checkOut8">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>21</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkOut7">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>21</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkOut6">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>30</y>
+      <width>21</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkOut5">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>30</y>
+      <width>21</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkOut4">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>30</y>
+      <width>21</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkOut3">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>30</y>
+      <width>21</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkOut2">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>30</y>
+      <width>21</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkOut1">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>30</y>
+      <width>21</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>200</y>
+     <width>161</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>DDS</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QDial" name="dialDDS">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>30</y>
-     <width>71</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="maximum">
-    <number>16777216</number>
-   </property>
-   <property name="pageStep">
-    <number>100</number>
-   </property>
-  </widget>
-  <widget class="QSpinBox" name="lineDDS">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>100</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-   </property>
-   <property name="text" stdset="0">
-    <string>0</string>
-   </property>
-   <property name="maximum">
-    <number>16777216</number>
-   </property>
-   <property name="value">
-    <number>0</number>
-   </property>
-   <property name="maxLength" stdset="0">
-    <number>8</number>
+    <string> 8   7   6  5   4   3   2   1</string>
    </property>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>dialPWM1</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>linePWM1</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>55</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>115</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialPWM2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>linePWM2</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>115</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>linePWM1</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>dialPWM1</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>55</x>
+     <y>115</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>linePWM2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>dialPWM2</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>115</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialAMP1</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lineAMP1</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>55</x>
+     <y>205</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>255</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialAMP2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lineAMP2</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>205</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>255</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineAMP1</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>dialAMP1</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>55</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineAMP2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>dialAMP2</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialDDS</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lineDDS</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>330</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>115</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineDDS</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>dialDDS</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>330</x>
+     <y>115</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>60</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

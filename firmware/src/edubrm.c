@@ -37,8 +37,7 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			break;
 		case 'm':
 			which = dst[1];
-			chan = dst[2];
-			mult = dst[3] + (dst[4]<<8);
+			mult = dst[2] + (dst[3]<<8);
 			// TODO: set opamp (which) on channel (chan) with multiplicator (mult)
 			break;
 		case 's':

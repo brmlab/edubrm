@@ -7,8 +7,6 @@ class Device:
     INSIZE    = 64
     OUTSIZE   = 64
 
-    polling = 0
-
     def __init__(self):
         usbdev = usb.core.find(idVendor = self.VENDORID, idProduct = self.PRODUCTID)
         if usbdev == None:
@@ -33,9 +31,9 @@ class Device:
     def dds(self, wavetype, freq):
         self.epo.write('d' + chr(wavetype) + chr(freq & 0xff) + chr((freq >> 8) & 0xff) + chr((freq >> 16) & 0xff) + chr(freq >> 24))
 
-    # set opamp (which=1,2), (chan=6), (mult=16bit)
-    def opamp(self, which, chan, mult):
-        self.epo.write('m' + chr(which) + chr(chan) + chr(mult & 0xff) + chr(mult >> 8))
+    # set opamp (which=1,2), (mult=16bit)
+    def opamp(self, which, mult):
+        self.epo.write('m' + chr(which) + chr(mult & 0xff) + chr(mult >> 8))
 
     # set switch (which=1..8), state=(0,1)
     def switch(self, which, state):
@@ -52,9 +50,6 @@ class Device:
     # set output (which=8bit)
     def setout(self, which):
         self.epo.write('O' + chr(which))
-
-    def pollfreq(self, freq):
-        self.polling = freq
 
     def state(self):
         # 4x AD (16 bits) + 8x I

@@ -1,5 +1,6 @@
 from PyQt4.QtGui import QWidget
 from PyQt4.QtCore import pyqtSlot
+from PyQt4.QtCore import QObject
 from ModuleDebugUi import Ui_ModuleDebug
 
 class ModuleDebugWidget(QWidget):
