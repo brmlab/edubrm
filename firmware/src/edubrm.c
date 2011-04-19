@@ -60,7 +60,7 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			break;
 		case 'P':
 			states = dst[1];
-			// TODO: set pins to states
+			// TODO: set pins to states (1 is INPUT, 0 is OUTPUT)
 			// pin1 is PIN_1
 			// pin2 is PIN_2
 			// pin3 is PIN_11
