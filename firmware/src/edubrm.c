@@ -29,33 +29,49 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			which = dst[1];
 			duty = dst[2] + (dst[3]<<8);
 			// TODO: set PWM (which) to (duty)
+			// PWM_1 is PIN_9
+			// PWM_2 is PIN_17
 			break;
 		case 'd':
 			wavetype = dst[1];
-			// TODO: set DDS to (wavetype)
+			// TODO: set DDS to (wavetype) using SPI (set PIN_10 to 0, send SPI commands, set PIN_10 to 1)
 			break;
 		case 'D':
 			freq = dst[1] + (dst[2]<<8) + (dst[3]<<16) + (dst[4]<<24);
-			// TODO: set DDS to (freq) Hz
+			// TODO: set DDS to (freq) Hz using SPI (set PIN_10 to 0, send SPI commands, set PIN_10 to 1)
 			break;
 		case 'm':
 			which = dst[1];
 			chan = dst[2];
 			gain = dst[3];
 			// TODO: set opamp (which) on channel (chan) with gain (gain)
+			// for opamp1: set PIN_48 to 0, send SPI commands, set PIN_48 to 1
+			// for opamp2: set PIN_43 to 0, send SPI commands, set PIN_43 to 1
 			break;
 		case 's':
 			states = dst[1];
 			// TODO: set switches to states
+			// switch1: PIN_12
+			// switch2: PIN_24
+			// switch3: PIN_25
+			// switch4: PIN_31
+			// switch5: PIN_36
+			// switch6: PIN_37
 			break;
 		case 'P':
 			states = dst[1];
 			// TODO: set pins to states
+			// pin1 is PIN_1
+			// pin2 is PIN_2
+			// pin3 is PIN_11
 			break;
 		case 'o':
 			which = dst[1] >> 1;
 			state = dst[1] & 0x01;
 			// TODO: set output pins (which) to state (state)
+			// pin1 is PIN_1
+			// pin2 is PIN_2
+			// pin3 is PIN_11
 			break;
 	}
 }
