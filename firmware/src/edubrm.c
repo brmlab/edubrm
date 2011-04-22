@@ -2,6 +2,7 @@
 #include "LPC13xx.h"
 #include "ssp.h"
 #include "adc.h"
+#include "edubrm.h"
 
 void GetInReport (uint8_t src[], uint32_t length)
 {
@@ -28,28 +29,30 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 		case 'p':
 			which = dst[1];
 			duty = dst[2] + (dst[3]<<8);
-			EnablePWM2(65535, duty);
-			// PWM_1 is PIN_9
-			// PWM_2 is PIN_17
+			if (which == 1) {
+				EnablePWM1(65535, duty);
+			} else {
+				EnablePWM2(65535, duty);
+			}
 			break;
 		case 'd':
-		//	wavetype = dst[1];
+			wavetype = dst[1];
 			// TODO: set DDS to (wavetype) using SPI (set PIN_10 to 0, send SPI commands, set PIN_10 to 1)
 			break;
 		case 'D':
-		//	freq = dst[1] + (dst[2]<<8) + (dst[3]<<16) + (dst[4]<<24);
+			freq = dst[1] + (dst[2]<<8) + (dst[3]<<16) + (dst[4]<<24);
 			// TODO: set DDS to (freq) Hz using SPI (set PIN_10 to 0, send SPI commands, set PIN_10 to 1)
 			break;
 		case 'm':
-		//	which = dst[1];
-		//	chan = dst[2];
-		//	gain = dst[3];
+			which = dst[1];
+			chan = dst[2];
+			gain = dst[3];
 			// TODO: set opamp (which) on channel (chan) with gain (gain)
 			// for opamp1: set PIN_48 to 0, send SPI commands, set PIN_48 to 1
 			// for opamp2: set PIN_43 to 0, send SPI commands, set PIN_43 to 1
 			break;
 		case 's':
-		//	states = dst[1];
+			states = dst[1];
 			// TODO: set switches to states
 			// switch1: PIN_12
 			// switch2: PIN_24
@@ -59,15 +62,15 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			// switch6: PIN_37
 			break;
 		case 'P':
-		//	states = dst[1];
+			states = dst[1];
 			// TODO: set pins to states (1 is INPUT, 0 is OUTPUT)
 			// pin1 is PIN_1
 			// pin2 is PIN_2
 			// pin3 is PIN_11
 			break;
 		case 'o':
-		//	which = dst[1] >> 1;
-		//	state = dst[1] & 0x01;
+			which = dst[1] >> 1;
+			state = dst[1] & 0x01;
 			// TODO: set output pins (which) to state (state)
 			// pin1 is PIN_1
 			// pin2 is PIN_2
@@ -115,8 +118,28 @@ void TIMER32_0_IRQHandler(void) {
 
 }
 
-void EnablePWM1() {
-	// FAIL
+void EnablePWM1(uint32_t period, uint32_t duty) {
+
+	if (!duty) {
+		LPC_SYSCON->SYSAHBCLKCTRL &= ~(1<<9); // disable
+		return;
+	}
+
+	LPC_SYSCON->SYSAHBCLKCTRL |= 1<<9; // Enables clock for 32-bit counter/timer 0.
+
+	LPC_IOCON->PIO1_6 &= ~0x07;
+	LPC_IOCON->PIO1_6 |= 0x01; // Selects function CT32B0_MAT0
+
+	LPC_TMR32B0->MR3 = period;
+	LPC_TMR32B0->MR0 = duty;
+
+	LPC_TMR32B0->MCR = 1<<10; // Reset on MR3: the TC will be reset if MR3 matches it.
+
+	LPC_TMR32B0->EMR = 3<<4; // Toggle the corresponding External Match bit/output.
+
+	LPC_TMR32B0->PWMC = 1<<0 | 1<<3; // enable PWM
+
+	LPC_TMR32B0->TCR = 1;
 }
 
 void EnablePWM2(uint16_t period, uint16_t duty) {
@@ -140,29 +163,5 @@ void EnablePWM2(uint16_t period, uint16_t duty) {
 
 	LPC_TMR16B1->PWMC = 1<<0 | 1<<3; // enable PWM
 
-	//LPC_TMR16B1->MCR |=  1<<9| 1<<0; NVIC_EnableIRQ(TIMER_16_1_IRQn);
-
 	LPC_TMR16B1->TCR = 1;
 }
-
-void PWMRun(void) {
-
-	LPC_SYSCON->SYSAHBCLKCTRL |= 1<<9; // Enables clock for 32-bit counter/timer 0.
-
-	LPC_IOCON->PIO1_6 &= ~0x07;
-	LPC_IOCON->PIO1_6 |= 0x02; // Selects function CT32B0_MAT0
-
-	LPC_TMR32B0->MR3 = 4294967; // period
-	LPC_TMR32B0->MR0 = 4294967/2; // duty
-
-	LPC_TMR32B0->MCR = 1<<10; // Reset on MR3: the TC will be reset if MR3 matches it.
-
-	LPC_TMR32B0->EMR = 3<<4; // Toggle the corresponding External Match bit/output.
-
-	LPC_TMR32B0->PWMC = 1<<0 | 1<<3; // enable pwn
-
-//	LPC_TMR32B0->MCR |=  1<<9| 1<<0; NVIC_EnableIRQ(TIMER_32_0_IRQn);
-
-	LPC_TMR32B0->TCR = 1;
-}
-

@@ -3,7 +3,7 @@ from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtCore import QObject
 from ModuleDebugUi import Ui_ModuleDebug
-#from device import Device
+from device import Device
 
 class ModuleDebugWidget(QWidget):
 
@@ -25,16 +25,17 @@ class ModuleDebugWidget(QWidget):
         QObject.connect(self.ui.pushPin2, SIGNAL("clicked(bool)"), self.on_pins_changed)
         QObject.connect(self.ui.pushPin3, SIGNAL("clicked(bool)"), self.on_pins_changed)
 
-#        self.dev = Device()
+        self.dev = Device()
+        print self.dev
 
     @pyqtSlot(int)
     def on_dialPWM1_valueChanged(self, val):
-#        self.dev.pwm(1, val)
+        self.dev.pwm(1, val)
         print 'pwm1:', val
 
     @pyqtSlot(int)
     def on_dialPWM2_valueChanged(self, val):
-#        self.dev.pwm(2, val)
+        self.dev.pwm(2, val)
         print 'pwm2:', val
 
     @pyqtSlot(int)

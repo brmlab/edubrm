@@ -25,6 +25,7 @@ class Device:
 
     # sets pwm (which=1,2), (duty=16bit)
     def pwm(self, which, duty):
+        duty = 65535 - duty
         self.epo.write('p' + chr(which) + chr(duty & 0xff) + chr(duty >> 8))
 
     # sets ddswave (wave=square,sine,saw1,saw2)
