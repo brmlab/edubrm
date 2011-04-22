@@ -20,8 +20,8 @@ void GetInReport (uint8_t src[], uint32_t length)
 
 void SetOutReport (uint8_t dst[], uint32_t length)
 {
-	uint8_t which, wavetype, chan, states;
-	uint16_t duty, mult;
+	uint8_t which, wavetype, chan, states, gain, state;
+	uint16_t duty;
 	uint32_t freq;
 
 	switch (dst[0]) {
