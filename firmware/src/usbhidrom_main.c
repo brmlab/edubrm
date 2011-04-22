@@ -77,8 +77,6 @@ int main (void)
 
   for (n = 0; n < 75; n++) {}
 
-  PWMRun();
-
   while (1)
 	  __WFI();
 }

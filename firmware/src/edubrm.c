@@ -28,28 +28,28 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 		case 'p':
 			which = dst[1];
 			duty = dst[2] + (dst[3]<<8);
-			// TODO: set PWM (which) to (duty)
+			EnablePWM2(65535, duty);
 			// PWM_1 is PIN_9
 			// PWM_2 is PIN_17
 			break;
 		case 'd':
-			wavetype = dst[1];
+		//	wavetype = dst[1];
 			// TODO: set DDS to (wavetype) using SPI (set PIN_10 to 0, send SPI commands, set PIN_10 to 1)
 			break;
 		case 'D':
-			freq = dst[1] + (dst[2]<<8) + (dst[3]<<16) + (dst[4]<<24);
+		//	freq = dst[1] + (dst[2]<<8) + (dst[3]<<16) + (dst[4]<<24);
 			// TODO: set DDS to (freq) Hz using SPI (set PIN_10 to 0, send SPI commands, set PIN_10 to 1)
 			break;
 		case 'm':
-			which = dst[1];
-			chan = dst[2];
-			gain = dst[3];
+		//	which = dst[1];
+		//	chan = dst[2];
+		//	gain = dst[3];
 			// TODO: set opamp (which) on channel (chan) with gain (gain)
 			// for opamp1: set PIN_48 to 0, send SPI commands, set PIN_48 to 1
 			// for opamp2: set PIN_43 to 0, send SPI commands, set PIN_43 to 1
 			break;
 		case 's':
-			states = dst[1];
+		//	states = dst[1];
 			// TODO: set switches to states
 			// switch1: PIN_12
 			// switch2: PIN_24
@@ -59,21 +59,28 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			// switch6: PIN_37
 			break;
 		case 'P':
-			states = dst[1];
+		//	states = dst[1];
 			// TODO: set pins to states (1 is INPUT, 0 is OUTPUT)
 			// pin1 is PIN_1
 			// pin2 is PIN_2
 			// pin3 is PIN_11
 			break;
 		case 'o':
-			which = dst[1] >> 1;
-			state = dst[1] & 0x01;
+		//	which = dst[1] >> 1;
+		//	state = dst[1] & 0x01;
 			// TODO: set output pins (which) to state (state)
 			// pin1 is PIN_1
 			// pin2 is PIN_2
 			// pin3 is PIN_11
 			break;
 	}
+}
+
+void TIMER16_1_IRQHandler(void) {
+	LPC_TMR16B1->IR = 0xff;
+	LPC_GPIO1->DIR ^= 1<<6;
+	LPC_TMR16B1->MR0 -= 100;
+
 }
 
 //static uint8_t x = 0;
@@ -106,6 +113,36 @@ void TIMER32_0_IRQHandler(void) {
 	x = (x&(1<<3)) ? 0xff : 0;
 	SSPSend(&x, 1);
 
+}
+
+void EnablePWM1() {
+	// FAIL
+}
+
+void EnablePWM2(uint16_t period, uint16_t duty) {
+
+	if (!duty) {
+		LPC_SYSCON->SYSAHBCLKCTRL &= ~(1<<8); // disable
+		return;
+	}
+
+	LPC_SYSCON->SYSAHBCLKCTRL |= 1<<8; // Enables clock for 16-bit counter/timer 1.
+
+	LPC_IOCON->PIO1_9 &= ~0x07;
+	LPC_IOCON->PIO1_9 |= 0x01; // Selects function CT16B1_MAT0
+
+	LPC_TMR16B1->MR3 = period;
+	LPC_TMR16B1->MR0 = duty;
+
+	LPC_TMR16B1->MCR = 1<<10; // Reset on MR3: the TC will be reset if MR3 matches it.
+
+	LPC_TMR16B1->EMR = 3<<4; // Toggle the corresponding External Match bit/output.
+
+	LPC_TMR16B1->PWMC = 1<<0 | 1<<3; // enable PWM
+
+	//LPC_TMR16B1->MCR |=  1<<9| 1<<0; NVIC_EnableIRQ(TIMER_16_1_IRQn);
+
+	LPC_TMR16B1->TCR = 1;
 }
 
 void PWMRun(void) {
