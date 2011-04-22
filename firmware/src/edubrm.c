@@ -128,7 +128,7 @@ void EnablePWM1(uint32_t period, uint32_t duty) {
 	LPC_SYSCON->SYSAHBCLKCTRL |= 1<<9; // Enables clock for 32-bit counter/timer 0.
 
 	LPC_IOCON->PIO1_6 &= ~0x07;
-	LPC_IOCON->PIO1_6 |= 0x01; // Selects function CT32B0_MAT0
+	LPC_IOCON->PIO1_6 |= 0x02; // Selects function CT32B0_MAT0
 
 	LPC_TMR32B0->MR3 = period;
 	LPC_TMR32B0->MR0 = duty;
