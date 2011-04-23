@@ -24,6 +24,8 @@ class ModuleButton(QPushButton):
         self.form.ui.lblTitle.setText(self.mod.title)
         self.form.ui.areaModule.setWidget(self.mod.widget)
         self.form.ui.areaModule.show()
+        self.form.mod = self.mod
+        self.mod.start()
 
 class Main(QMainWindow):
     def __init__(self):
@@ -40,6 +42,7 @@ class Main(QMainWindow):
 
     @pyqtSlot()
     def on_btnBack_clicked(self):
+        self.mod.stop()
         self.ui.lblTitle.setText('EduBRM')
         # TODO: erase everything from self.ui.areaModule
         self.ui.areaChoose.show()

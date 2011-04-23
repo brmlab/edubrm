@@ -151,5 +151,9 @@ class ModuleDebug():
         self.title = 'Debug'
         self.widget = ModuleDebugWidget()
 
-    def run(self):
-        print 'run Debug'
+    def start(self):
+        print 'start Debug'
+
+    def stop(self):
+        print 'stop Debug'
+        self.widget.timer.stop()

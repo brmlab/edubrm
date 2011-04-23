@@ -4,5 +4,8 @@ class ModuleA():
         self.title = 'A'
         self.widget = None
 
-    def run(self):
-        print 'run A'
+    def start(self):
+        print 'start A'
+
+    def stop(self):
+        print 'stop A'
