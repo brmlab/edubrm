@@ -662,10 +662,10 @@
      </rect>
     </property>
     <property name="minimum">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="maximum">
-     <number>999</number>
+     <number>1000</number>
     </property>
     <property name="pageStep">
      <number>10</number>
@@ -687,13 +687,13 @@
      <string>1</string>
     </property>
     <property name="minimum">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="maximum">
-     <number>999</number>
+     <number>1000</number>
     </property>
     <property name="value">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="maxLength" stdset="0">
      <number>3</number>
@@ -709,7 +709,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>AD1: 0</string>
+     <string>AD1: -</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelAD2">
@@ -722,7 +722,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>AD2: 0</string>
+     <string>AD2: -</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelAD3">
@@ -735,7 +735,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>AD3: 0</string>
+     <string>AD3: -</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelAD4">
@@ -748,7 +748,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>AD4: 0</string>
+     <string>AD4: -</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelAD5">
@@ -761,7 +761,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>AD5: 0</string>
+     <string>AD5: -</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelAD6">
@@ -774,7 +774,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>AD6: 0</string>
+     <string>AD6: -</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelIO2">
@@ -787,7 +787,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>IO2: 0</string>
+     <string>IO2: -</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelIO3">
@@ -800,7 +800,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>IO3: 0</string>
+     <string>IO3: -</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelIO1">
@@ -813,7 +813,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>IO1: 0</string>
+     <string>IO1: -</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelAD0">
@@ -826,7 +826,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>AD0: 0</string>
+     <string>AD0: -</string>
     </property>
    </widget>
   </widget>

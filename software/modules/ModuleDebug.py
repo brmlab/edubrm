@@ -2,6 +2,7 @@ from PyQt4.QtGui import QWidget
 from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtCore import QObject
+from PyQt4.QtCore import QTimer
 from ModuleDebugUi import Ui_ModuleDebug
 from device import Device
 
@@ -25,7 +26,13 @@ class ModuleDebugWidget(QWidget):
         QObject.connect(self.ui.pushPin2, SIGNAL("clicked(bool)"), self.on_pins_changed)
         QObject.connect(self.ui.pushPin3, SIGNAL("clicked(bool)"), self.on_pins_changed)
 
-        self.dev = Device(True)
+        # real device:
+        self.dev = Device()
+        # fake device:
+        # self.dev = Device(True)
+
+        self.timer = QTimer()
+        QObject.connect(self.timer, SIGNAL("timeout()"), self.read_inputs)
 
     @pyqtSlot(int)
     def on_dialPWM1_valueChanged(self, val):
@@ -109,7 +116,34 @@ class ModuleDebugWidget(QWidget):
 
     @pyqtSlot(int)
     def on_dialInputFreq_valueChanged(self, val):
-        print self.dev.read()
+        self.timer.stop()
+        if val > 0:
+            self.timer.start(1000.0/val)
+        else:
+            self.ui.labelAD0.setText('AD0: -')
+            self.ui.labelAD1.setText('AD1: -')
+            self.ui.labelAD2.setText('AD2: -')
+            self.ui.labelAD3.setText('AD3: -')
+            self.ui.labelAD4.setText('AD4: -')
+            self.ui.labelAD5.setText('AD5: -')
+            self.ui.labelAD6.setText('AD6: -')
+            self.ui.labelIO1.setText('IO1: -')
+            self.ui.labelIO2.setText('IO2: -')
+            self.ui.labelIO3.setText('IO3: -')
+
+
+    def read_inputs(self):
+        r = self.dev.read()
+        self.ui.labelAD0.setText('AD0: ' + str(r[0]))
+        self.ui.labelAD1.setText('AD1: ' + str(r[1]))
+        self.ui.labelAD2.setText('AD2: ' + str(r[2]))
+        self.ui.labelAD3.setText('AD3: ' + str(r[3]))
+        self.ui.labelAD4.setText('AD4: ' + str(r[4]))
+        self.ui.labelAD5.setText('AD5: ' + str(r[5]))
+        self.ui.labelAD6.setText('AD6: ' + str(r[6]))
+        self.ui.labelIO1.setText('IO1: ' + str(r[7]))
+        self.ui.labelIO2.setText('IO2: ' + str(r[8]))
+        self.ui.labelIO3.setText('IO3: ' + str(r[9]))
 
 class ModuleDebug():
 

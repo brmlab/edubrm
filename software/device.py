@@ -83,7 +83,7 @@ class Device:
             return (randint(0,65535),                                       # AD0
                     randint(0,65535), randint(0,65535), randint(0,65535),   # AD1 .. AD3
                     randint(0,65535), randint(0,65535), randint(0,65535),   # AD4 .. AD6
-                    randint(0,7))                                           # IO1 .. IO3
+                    randint(0,1), randint(0,1), randint(0,1))               # IO1 .. IO3
         else:
             i = self.epi.read(self.INSIZE)
             return (i[0] + i[1]<<8,                                         # AD0
