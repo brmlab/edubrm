@@ -17,6 +17,7 @@ void GetInReport (uint8_t src[], uint32_t length)
 	}
 	// TODO: fix the following - replace IP[i] with real value of input pin (I)
 	// src[14] = IP[0] + (IP[1]<<1) + (IP[2]<<2);
+	src[14] = 0;
 }
 
 void SetOutReport (uint8_t dst[], uint32_t length)
