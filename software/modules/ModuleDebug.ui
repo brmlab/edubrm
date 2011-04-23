@@ -646,7 +646,7 @@
      <x>10</x>
      <y>270</y>
      <width>461</width>
-     <height>151</height>
+     <height>161</height>
     </rect>
    </property>
    <property name="title">
@@ -703,7 +703,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>20</y>
+      <y>40</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -716,7 +716,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>40</y>
+      <y>60</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -729,7 +729,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>60</y>
+      <y>80</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -742,7 +742,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>80</y>
+      <y>100</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -755,7 +755,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>100</y>
+      <y>120</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -768,7 +768,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>120</y>
+      <y>140</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -814,6 +814,19 @@
     </property>
     <property name="text">
      <string>IO1: 0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelAD0">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>20</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AD0: 0</string>
     </property>
    </widget>
   </widget>

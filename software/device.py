@@ -53,8 +53,9 @@ class Device:
         self.epo.write('o' + chr(which<<1 + state))
 
     def read(self):
-        # 6x AD (16 bits) + 3 x I
+        # 7x AD (16 bits) + 3 x I
         i = self.epi.read(self.INSIZE)
-        return (i[0] + i[1]<<8, i[2] + i[3]<<8, i[4] + i[5]<<8,
-                i[6] + i[7]<<8, i[9] + i[9]<<8, i[10] + i[11]<<8,
-                i[12] & 0x01, (i[12] & 0x02) >> 1, (i[12] & 0x04) >> 2)
+        return (i[0] + i[1]<<8,                                         # AD0
+                i[2] + i[3]<<8, i[4] + i[5]<<8, i[6] + i[7]<<8,         # AD1 .. AD3
+                i[9] + i[9]<<8, i[10] + i[11]<<8, i[12] + i[13]<<8,     # AD4 .. AD6
+                i[14] & 0x01, (i[14] & 0x02) >> 1, (i[14] & 0x04) >> 2) # IO1 .. IO3

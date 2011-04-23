@@ -10,13 +10,13 @@ void GetInReport (uint8_t src[], uint32_t length)
 	uint32_t volatile reg = LPC_USB->CmdCode;
 	if (reg & (5<<8)) return;
 
-	for (i=0; i<6; ++i) {
+	for (i=0; i<7; ++i) {
 		uint32_t v = ADCRead(i);
 		src[i*2  ] = v & 0xff;
 		src[i*2+1] = (v>>8) & 0xff;
 	}
 	// TODO: fix the following - replace IP[i] with real value of input pin (I)
-	// src[12] = IP[0] + (IP[1]<<1) + (IP[2]<<2);
+	// src[14] = IP[0] + (IP[1]<<1) + (IP[2]<<2);
 }
 
 void SetOutReport (uint8_t dst[], uint32_t length)
