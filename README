@@ -12,6 +12,11 @@ Pavol "stick" Rusnak
 
 Software
 --------
-- required packages:
+
+- required packages openSUSE:
   * python-qt4-devel
-  * python-usb (>= 1.0)
+  * python-usb (from devel:languages:python)
+
+- required packages Ubuntu:
+  * pyqt4-dev-tools
+  * pyusb (from ppa:gekkio/pyusb)
