@@ -19,4 +19,4 @@ Software
 
 - required packages Ubuntu:
   * pyqt4-dev-tools
-  * pyusb (from ppa:gekkio/pyusb)
+  * python-usb (from ppa:gekkio/pyusb)
