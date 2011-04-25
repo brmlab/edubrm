@@ -17,10 +17,14 @@ class Device:
             except:
                 pass
             usbdev.set_configuration()
-            self.epo = usb.util.find_descriptor(usbdev.get_interface_altsetting(),
+            cfg = usbdev.get_active_configuration()
+            interface_number = cfg[(0,0)].bInterfaceNumber
+            alternate_setting = usb.control.get_interface(usbdev, interface_number)
+            intf = usb.util.find_descriptor(cfg, bInterfaceNumber = interface_number, bAlternateSetting = alternate_setting)
+            self.epo = usb.util.find_descriptor(intf,
                            custom_match = lambda e: \
                                usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_OUT)
-            self.epi = usb.util.find_descriptor(usbdev.get_interface_altsetting(),
+            self.epi = usb.util.find_descriptor(intf,
                            custom_match = lambda e: \
                                usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN)
         else:
