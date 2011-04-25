@@ -35,7 +35,8 @@ class Device:
         if self.fake:
             print 'pwm', which, duty
         else:
-            duty = 65535 - duty
+            if duty != 0:
+                duty = 65536 - duty
             self.epo.write('p' + chr(which) + chr(duty & 0xff) + chr(duty >> 8))
 
     # sets ddswave (wave=square,sine,saw1,saw2)
