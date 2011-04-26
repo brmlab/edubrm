@@ -60,8 +60,8 @@ LPC_SSP->CPSR = 0x02;
 LPC_IOCON->PIO0_7 = 0x00; // D/C^
 LPC_GPIO0->DIR |= 1 << 7;
 
-LPC_IOCON->PIO2_0 = 0x00; // RES^
-LPC_GPIO2->DIR |= 1 << 0;
+// LPC_IOCON->PIO2_0 = 0x00; // RES^
+// LPC_GPIO2->DIR |= 1 << 0;
 
 // SSP Enable with Master mode
 LPC_SSP->CR1 = (0x01<<1) | (0x00<<2);

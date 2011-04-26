@@ -16,10 +16,9 @@ void GetInReport (uint8_t src[], uint32_t length)
 		src[i*2+1] = (v>>8) & 0xff;
 	}
 	src[14] = 0;
-	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<0] & (1<<0));
-	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<6] & (1<<6)) >> 5;
+	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<6] & (1<<6)) >> 6;
+	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<0] & (1<<0)) << 1;
 	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<7] & (1<<7)) >> 5;
-
 }
 
 void SetOutReport (uint8_t dst[], uint32_t length)
@@ -67,24 +66,23 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 		case 'P':
 			states = dst[1];
 			PinDir(states);
-			// TODO: set pins to states (1 is INPUT, 0 is OUTPUT)
-			// pin1 is PIN_1
-			// pin2 is PIN_2
-			// pin3 is PIN_11
 			break;
 		case 'o':
 			which = dst[1] >> 1;
 			state = dst[1] & 0x01;
 			PinState(which, state);
-			// TODO: set output pins (which) to state (state)
-			// pin1 is PIN_1
-			// pin2 is PIN_2
-			// pin3 is PIN_11
 			break;
 	}
 }
 
 void PinInit() {
+	// set pins function
+	LPC_IOCON->PIO2_0 &= ~0x07;
+	LPC_IOCON->PIO2_0 |= 0x00;
+	LPC_IOCON->PIO2_6 &= ~0x07;
+	LPC_IOCON->PIO2_6 |= 0x00;
+	LPC_IOCON->PIO2_7 &= ~0x07;
+	LPC_IOCON->PIO2_7 |= 0x00;
 	PinDir(0); // all 3 pins are output 0
 	PinState(1, 0);
 	PinState(2, 0);
@@ -100,15 +98,15 @@ void EduInit() {
 void PinDir(uint16_t mask) {
 	mask &= 7;
 	mask ^= 7;
-	mask = ((mask & 4) << 5) | ((mask & 2) << 5) | (mask & 1);
+	mask = ((mask & 4) << 5) | ((mask & 2) >> 1) | ((mask & 1)<<6);
 	LPC_GPIO2->DIR |= mask;
 	mask |= ~(1<<0 | 1<<6 | 1<<7);
 	LPC_GPIO2->DIR &= mask;
 
-	if (!(mask & 1))
+	if (!(mask & (1<<6)))
 		PinState(1, 0);
 
-	if (!(mask & (1<<6)))
+	if (!(mask & (1<<0)))
 		PinState(2, 0);
 
 	if (!(mask & (1<<7)))
@@ -119,7 +117,12 @@ void PinDir(uint16_t mask) {
 void PinState(uint8_t which, uint8_t state) {
 	state &= 1;
 	which -= 1;
-	if (which > 0)which += 5;
+	switch (which) {
+		case 0: which = 6; break;
+		case 1: which = 0; break;
+		case 2: which = 7; break;
+	}
+	if (which < 0) return;
 	LPC_GPIO2->MASKED_ACCESS[1<<which] |= (state<<which);
 	LPC_GPIO2->MASKED_ACCESS[1<<which] &= ((state<<which) | ~(1<<which));
 }
@@ -128,7 +131,6 @@ void TIMER16_1_IRQHandler(void) {
 	LPC_TMR16B1->IR = 0xff;
 	LPC_GPIO1->DIR ^= 1<<6;
 	LPC_TMR16B1->MR0 -= 100;
-
 }
 
 //static uint8_t x = 0;
