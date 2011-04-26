@@ -77,6 +77,18 @@ int main (void)
 
   for (n = 0; n < 75; n++) {}
 
+  LPC_GPIO2->DIR &= ~(1<<0); // pin2
+  LPC_GPIO2->DIR &= ~(1<<6); // pin1
+  LPC_GPIO2->DIR &= ~(1<<7); // pin3
+
+  LPC_GPIO2->DIR |= (1<<0);
+  LPC_GPIO2->DIR |= (1<<6);
+  LPC_GPIO2->DIR |= (1<<7);
+
+  LPC_GPIO2->MASKED_ACCESS[1<<0] |= 1<<0;
+  LPC_GPIO2->MASKED_ACCESS[1<<6] |= 1<<6;
+  LPC_GPIO2->MASKED_ACCESS[1<<7] |= 1<<7;
+
   while (1)
 	  __WFI();
 }

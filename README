@@ -20,3 +20,7 @@ Software
 - required packages Ubuntu:
   * pyqt4-dev-tools
   * python-usb (from ppa:gekkio/pyusb)
+
+TODO:
+	prechod z MAX na 0 u PWM nefunguje
+

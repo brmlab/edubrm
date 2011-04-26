@@ -64,6 +64,7 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			break;
 		case 'P':
 			states = dst[1];
+			PinDir(states);
 			// TODO: set pins to states (1 is INPUT, 0 is OUTPUT)
 			// pin1 is PIN_1
 			// pin2 is PIN_2
@@ -72,12 +73,31 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 		case 'o':
 			which = dst[1] >> 1;
 			state = dst[1] & 0x01;
+			PinState(which, state);
 			// TODO: set output pins (which) to state (state)
 			// pin1 is PIN_1
 			// pin2 is PIN_2
 			// pin3 is PIN_11
 			break;
 	}
+}
+
+void PinDir(uint16_t mask) {
+	mask &= 7;
+	mask = ((mask & 4) << 5) | ((mask & 2) << 5) | (mask & 1);
+	LPC_GPIO2->DIR |= mask;
+	mask |= ~(1<<0 | 1<<6 | 1<<7);
+	LPC_GPIO2->DIR &= mask;
+
+	LPC_GPIO2->MASKED_ACCESS[1<<0] |= 1<<0;
+	  LPC_GPIO2->MASKED_ACCESS[1<<6] |= 1<<6;
+	  LPC_GPIO2->MASKED_ACCESS[1<<7] |= 1<<7;
+}
+
+void PinState(uint8_t which, uint8_t state) {
+//	if (which > 1) which += 4;
+//	LPC_GPIO2->MASKED_ACCESS[1<<which] |= (1<<which);
+//	LPC_GPIO2->MASKED_ACCESS[1<<which] &= (1<<which);
 }
 
 void TIMER16_1_IRQHandler(void) {
