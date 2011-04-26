@@ -17,8 +17,8 @@ void GetInReport (uint8_t src[], uint32_t length)
 	}
 	src[14] = 0;
 	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<0] & (1<<0));
-	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<6] & (1<<6));
-	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<7] & (1<<7));
+	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<6] & (1<<6)) >> 5;
+	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<7] & (1<<7)) >> 5;
 
 }
 
