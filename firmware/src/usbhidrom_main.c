@@ -43,12 +43,8 @@ int main (void)
   SystemInit();
 //#endif
 
-  SSPInit();
-
-  ADCInit(ADC_CLK);
-
   // enable read on pin PIO3_3
-  LPC_GPIO3->DIR &= ~(1<<3);
+  // LPC_GPIO3->DIR &= ~(1<<3);
 
   HidDevInfo.idVendor = USB_VENDOR_ID;
   HidDevInfo.idProduct = USB_PROD_ID;
@@ -88,6 +84,8 @@ int main (void)
   LPC_GPIO2->MASKED_ACCESS[1<<0] |= 1<<0;
   LPC_GPIO2->MASKED_ACCESS[1<<6] |= 1<<6;
   LPC_GPIO2->MASKED_ACCESS[1<<7] |= 1<<7;
+
+  EduInit();
 
   while (1)
 	  __WFI();

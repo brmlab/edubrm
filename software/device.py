@@ -79,7 +79,7 @@ class Device:
         if self.fake:
             print 'setout', which, state
         else:
-            self.epo.write('o' + chr(which<<1 + state))
+            self.epo.write('o' + chr((which<<1) + state))
 
     # 7x AD (16 bits) + 3 x I
     def read(self):

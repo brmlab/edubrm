@@ -15,9 +15,11 @@ void GetInReport (uint8_t src[], uint32_t length)
 		src[i*2  ] = v & 0xff;
 		src[i*2+1] = (v>>8) & 0xff;
 	}
-	// TODO: fix the following - replace IP[i] with real value of input pin (I)
-	// src[14] = IP[0] + (IP[1]<<1) + (IP[2]<<2);
 	src[14] = 0;
+	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<0] & (1<<0));
+	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<6] & (1<<6));
+	src[14] |= (LPC_GPIO2->MASKED_ACCESS[1<<7] & (1<<7));
+
 }
 
 void SetOutReport (uint8_t dst[], uint32_t length)
@@ -82,22 +84,44 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 	}
 }
 
+void PinInit() {
+	PinDir(0); // all 3 pins are output 0
+	PinState(1, 0);
+	PinState(2, 0);
+	PinState(3, 0);
+}
+
+void EduInit() {
+	SSPInit();
+	ADCInit(ADC_CLK);
+	PinInit();
+}
+
 void PinDir(uint16_t mask) {
 	mask &= 7;
+	mask ^= 7;
 	mask = ((mask & 4) << 5) | ((mask & 2) << 5) | (mask & 1);
 	LPC_GPIO2->DIR |= mask;
 	mask |= ~(1<<0 | 1<<6 | 1<<7);
 	LPC_GPIO2->DIR &= mask;
 
-	LPC_GPIO2->MASKED_ACCESS[1<<0] |= 1<<0;
-	  LPC_GPIO2->MASKED_ACCESS[1<<6] |= 1<<6;
-	  LPC_GPIO2->MASKED_ACCESS[1<<7] |= 1<<7;
+	if (!(mask & 1))
+		PinState(1, 0);
+
+	if (!(mask & (1<<6)))
+		PinState(2, 0);
+
+	if (!(mask & (1<<7)))
+		PinState(3, 0);
+
 }
 
 void PinState(uint8_t which, uint8_t state) {
-//	if (which > 1) which += 4;
-//	LPC_GPIO2->MASKED_ACCESS[1<<which] |= (1<<which);
-//	LPC_GPIO2->MASKED_ACCESS[1<<which] &= (1<<which);
+	state &= 1;
+	which -= 1;
+	if (which > 0)which += 5;
+	LPC_GPIO2->MASKED_ACCESS[1<<which] |= (state<<which);
+	LPC_GPIO2->MASKED_ACCESS[1<<which] &= ((state<<which) | ~(1<<which));
 }
 
 void TIMER16_1_IRQHandler(void) {

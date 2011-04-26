@@ -29,7 +29,7 @@ class ModuleDebugWidget(QWidget):
         # real device:
         self.dev = Device()
         # fake device:
-#        self.dev = Device(True)
+       # self.dev = Device(True)
 
         self.timer = QTimer()
         QObject.connect(self.timer, SIGNAL("timeout()"), self.read_inputs)

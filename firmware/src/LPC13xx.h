@@ -238,18 +238,18 @@ typedef struct
 
   __IO uint32_t PIO0_8;
   __IO uint32_t PIO0_9;
-  __IO uint32_t JTAG_TCK_PIO0_10;
+  __IO uint32_t PIO0_10;
   __IO uint32_t PIO1_10;
   __IO uint32_t PIO2_11;
   __IO uint32_t PIO0_11; // JTAG_TDI_PIO0_11
-  __IO uint32_t JTAG_TMS_PIO1_0;
-  __IO uint32_t JTAG_TDO_PIO1_1;
+  __IO uint32_t PIO1_0;
+  __IO uint32_t PIO1_1;
 
-  __IO uint32_t JTAG_nTRST_PIO1_2;
+  __IO uint32_t PIO1_2;
   __IO uint32_t PIO3_0;
   __IO uint32_t PIO3_1;
   __IO uint32_t PIO2_3;
-  __IO uint32_t ARM_SWDIO_PIO1_3;
+  __IO uint32_t PIO1_3;
   __IO uint32_t PIO1_4;
   __IO uint32_t PIO1_11;
   __IO uint32_t PIO3_2;

@@ -27,7 +27,6 @@ void SSPSend( const uint8_t *buf, uint32_t Length )
 }
 
 void SSPInit() {
-  uint32_t i;
 
 // reset peripherals
 LPC_SYSCON->PRESETCTRL |= (0x01<<0); // SSP reset de-asserted
@@ -73,6 +72,8 @@ LPC_SSP->CR1 = (0x01<<1) | (0x00<<2);
 /* enable all error related interrupts */
 LPC_SSP->IMSC = (0x1<<0) | (0x1<<1);
 
+/* old debug display routine
+* uint32_t i;
 // command
 LPC_GPIO0->MASKED_ACCESS[0x01<<7] = 0 << 7;
 
@@ -87,5 +88,5 @@ LPC_GPIO0->MASKED_ACCESS[0x01<<7] = 1 << 7;
 // clear display
   for (i=0;i<84*6;i++)
     SSPSend((uint8_t *)"\x00", 1);
-
+*/
 }
