@@ -1,0 +1,26 @@
+shieldy:
+
+a) motorcek pripojeny na PINy - zem a AD1
+   - vykreslujem hodnotu z ADcka - bar + linegraph
+
+b) 9v baterka, spinac, ledka/ziarovka
+   - napatie z baterky - AD1 - osciloskop
+   - vystup za spinac - AD2 - osciloskop
+   - vykreslit schemu, ktora zobrazuje kde je prud a kde nie
+
+c) odpor, kondik, odpor - jednosmerny obvod
+   - PWM1 - napatie do obvodu
+   - AD1 - priamo za filtrom PWM (zdroj)
+   - AD2 - za odporom ktory sa bude nabijat
+   - AD3 - za kondikom
+
+   - ten isty shield ale miesto PWM1 bude DDSko (striedavy obvod)
+
+d) odpor, cievka, odpor - jednosmerny obvod + striedavy obvod
+   - to iste zapojenie ako C
+
+e) rezonancny LC obvod - jednosmerny + striedavy obvod
+   - PWM1 - jednosmerny / DDS - striedavy
+   - AD1 - napatie na LC
+   - AD2 - prud do L
+   - AD3 - prud do C
