@@ -101,18 +101,18 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 }
 
 void SwitchesSetup(uint8_t states) {
-	LPC_GPIO2->MASKED_ACCESS[1<<8] |= ((( states && 0x01) >> 0)<<8);
-	LPC_GPIO2->MASKED_ACCESS[1<<8] &= ((((states && 0x01) >> 0)<<8) | ~(1<<8));
-	LPC_GPIO2->MASKED_ACCESS[1<<9] |= ((( states && 0x02) >> 1)<<9);
-	LPC_GPIO2->MASKED_ACCESS[1<<9] &= ((((states && 0x02) >> 1)<<9) | ~(1<<9));
-	LPC_GPIO2->MASKED_ACCESS[1<<10] |= ((( states && 0x04) >> 2)<<10);
-	LPC_GPIO2->MASKED_ACCESS[1<<10] &= ((((states && 0x04) >> 2)<<10) | ~(1<<10));
-	LPC_GPIO2->MASKED_ACCESS[1<<11] |= ((( states && 0x08) >> 3)<<11);
-	LPC_GPIO2->MASKED_ACCESS[1<<11] &= ((((states && 0x08) >> 3)<<11) | ~(1<<11));
-	LPC_GPIO3->MASKED_ACCESS[1<<0] |= ((( states && 0x10) >> 4)<<0);
-	LPC_GPIO3->MASKED_ACCESS[1<<0] &= ((((states && 0x10) >> 4)<<0) | ~(1<<0));
-	LPC_GPIO3->MASKED_ACCESS[1<<1] |= ((( states && 0x20) >> 5)<<1);
-	LPC_GPIO3->MASKED_ACCESS[1<<1] &= ((((states && 0x20) >> 5)<<1) | ~(1<<1));
+	LPC_GPIO2->MASKED_ACCESS[1<<8] |= ((( states & 0x01) >> 0)<<8);
+	LPC_GPIO2->MASKED_ACCESS[1<<8] &= ((((states & 0x01) >> 0)<<8) | ~(1<<8));
+	LPC_GPIO2->MASKED_ACCESS[1<<9] |= ((( states & 0x02) >> 1)<<9);
+	LPC_GPIO2->MASKED_ACCESS[1<<9] &= ((((states & 0x02) >> 1)<<9) | ~(1<<9));
+	LPC_GPIO2->MASKED_ACCESS[1<<10] |= ((( states & 0x04) >> 2)<<10);
+	LPC_GPIO2->MASKED_ACCESS[1<<10] &= ((((states & 0x04) >> 2)<<10) | ~(1<<10));
+	LPC_GPIO2->MASKED_ACCESS[1<<11] |= ((( states & 0x08) >> 3)<<11);
+	LPC_GPIO2->MASKED_ACCESS[1<<11] &= ((((states & 0x08) >> 3)<<11) | ~(1<<11));
+	LPC_GPIO3->MASKED_ACCESS[1<<0] |= ((( states & 0x10) >> 4)<<0);
+	LPC_GPIO3->MASKED_ACCESS[1<<0] &= ((((states & 0x10) >> 4)<<0) | ~(1<<0));
+	LPC_GPIO3->MASKED_ACCESS[1<<1] |= ((( states & 0x20) >> 5)<<1);
+	LPC_GPIO3->MASKED_ACCESS[1<<1] &= ((((states & 0x20) >> 5)<<1) | ~(1<<1));
 }
 
 void PinInit() {

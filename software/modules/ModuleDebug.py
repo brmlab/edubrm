@@ -27,9 +27,9 @@ class ModuleDebugWidget(QWidget):
         QObject.connect(self.ui.pushPin3, SIGNAL("clicked(bool)"), self.on_pins_changed)
 
         # real device:
-        self.dev = Device()
+#        self.dev = Device()
         # fake device:
-#        self.dev = Device(True)
+        self.dev = Device(True)
 
         self.timer = QTimer()
         QObject.connect(self.timer, SIGNAL("timeout()"), self.read_inputs)
