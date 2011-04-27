@@ -46,8 +46,8 @@ LPC_IOCON->SWCLK_PIO0_10 |= 0x02;>/* SSP CLK */
 #endif
 
 // This register is used to select a pin among three possible choices for the SSP SCK function.
-LPC_IOCON->SCKLOC = 1; // Selects SCK function for pin PIO2_11/SCK
-LPC_IOCON->PIO2_11 = 1;
+LPC_IOCON->SCKLOC = 0; // Selects SCK function for pin PIO2_11/SCK
+LPC_IOCON->PIO0_10 = 2;
 
 // set SSEL as GPIO that the master has total control of the sequence
 LPC_IOCON->PIO0_2 &= ~0x07;
