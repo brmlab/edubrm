@@ -1,6 +1,14 @@
 #include "LPC13xx.h"
 #include "ssp.h"
 
+void SSPSend2(const uint8_t a, const uint8_t b)
+{
+	uint8_t buf[2];
+	buf[0] = a;
+	buf[1] = b;
+	SSPSend(buf, 2);
+}
+
 void SSPSend( const uint8_t *buf, uint32_t Length )
 {
   uint32_t i;

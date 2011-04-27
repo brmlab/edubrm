@@ -46,7 +46,13 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 		case 'D':
 			freq = dst[1] + (dst[2]<<8) + (dst[3]<<16) + (dst[4]<<24);
 			LPC_GPIO0->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
-			// TODO: set SPI commands
+			freq = 0xFFFFFFFF/50000000*freq;
+			SSPSend2(0xF8, 0x00);
+			SSPSend2(0x33, ((freq & 0xFF000000) >> 24));
+			SSPSend2(0x22, ((freq & 0x00FF0000) >> 16));
+			SSPSend2(0x31, ((freq & 0x0000FF00) >> 8));
+			SSPSend2(0x20, ((freq & 0x000000FF)));
+			SSPSend2(0xC0, 0x00);
 			LPC_GPIO0->MASKED_ACCESS[1<<2] |= (0<<2);					// set chipselect to 1
 			break;
 		case 'm':
@@ -58,7 +64,20 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			} else {
 				LPC_GPIO3->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
 			}
-			// TODO: set opamp (which) on channel (chan) with gain (gain) via SPI
+			// set channel
+			SSPSend2(0x41, chan); // 000 - ch#1, 101 - ch#6
+			if (which == 1) {
+				LPC_GPIO3->MASKED_ACCESS[1<<3] |= (0<<3);					// set chipselect to 1
+			} else {
+				LPC_GPIO3->MASKED_ACCESS[1<<2] |= (0<<2);					// set chipselect to 1
+			}
+			if (which == 1) {
+				LPC_GPIO3->MASKED_ACCESS[1<<3] &= ((0<<3) | ~(1<<3));		// set chipselect to 0
+			} else {
+				LPC_GPIO3->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
+			}
+			// set gain
+			SSPSend2(0x40, gain); // 000 - 1, 111 - 32
 			if (which == 1) {
 				LPC_GPIO3->MASKED_ACCESS[1<<3] |= (0<<3);					// set chipselect to 1
 			} else {
@@ -119,7 +138,7 @@ void PinInit() {
 	LPC_IOCON->PIO3_1 |= 0x00;
 	LPC_GPIO2->DIR |= (1<<8) | (1<<9) | (1<<10) | (1<<11);
 	LPC_GPIO3->DIR |= (1<<0) | (1<<1);
-	SwitchesState(0);
+	SwitchesSetup(0);
 
 	//set chip select pins function
 	LPC_IOCON->PIO0_2 &= ~0x07; // DDS

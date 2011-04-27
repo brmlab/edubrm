@@ -110,6 +110,7 @@ extern void SSP_IRQHandler (void);
 extern void SSPInit( void );
 extern void SSPSend( const uint8_t *Buf, uint32_t Length );
 extern void SSPReceive( uint8_t *buf, uint32_t Length );
+extern void SSPSend2(const uint8_t a, const uint8_t b);
 
 #endif  /* __SSP_H__ */
 /*****************************************************************************

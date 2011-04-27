@@ -72,14 +72,14 @@ class ModuleDebugWidget(QWidget):
 
     @pyqtSlot()
     def on_comboAMP1_changed(self):
-        c = self.ui.comboAMP1c.currentIndex() + 1
-        g = (1,2,4,5,8,10,16,32)[self.ui.comboAMP1g.currentIndex()]
+        c = self.ui.comboAMP1c.currentIndex()
+        g = self.ui.comboAMP1g.currentIndex()
         self.dev.opamp(1, c, g)
 
     @pyqtSlot()
     def on_comboAMP2_changed(self):
-        c = self.ui.comboAMP2c.currentIndex() + 1
-        g = (1,2,4,5,8,10,16,32)[self.ui.comboAMP2g.currentIndex()]
+        c = self.ui.comboAMP2c.currentIndex()
+        g = self.ui.comboAMP2g.currentIndex()
         self.dev.opamp(2, c, g)
 
     @pyqtSlot()
