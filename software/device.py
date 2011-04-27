@@ -53,7 +53,7 @@ class Device:
         else:
             self.epo.write('D' + chr(freq & 0xff) + chr((freq >> 8) & 0xff) + chr((freq >> 16) & 0xff) + chr(freq >> 24))
 
-    # set opamp (which=1,2), (chan=1..6), (gain=1, 2, 4, 5, 8, 10, 16, 32)
+    # set opamp (which=1,2), (chan=0..5), (gain=0..7)
     def opamp(self, which, chan, gain):
         if self.fake:
             print 'opamp', which, chan, gain
