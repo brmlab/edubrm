@@ -61,26 +61,15 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			gain = dst[3];
 			if (which == 1) {
 				LPC_GPIO3->MASKED_ACCESS[1<<3] &= ((0<<3) | ~(1<<3));		// set chipselect to 0
-			} else {
-				LPC_GPIO3->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
-			}
-			// set channel
-			SSPSend2(0x41, chan); // 000 - ch#1, 101 - ch#6
-			if (which == 1) {
+				SSPSend2(0x40, gain); // gain: 000 - 1, 111 - 32
 				LPC_GPIO3->MASKED_ACCESS[1<<3] |= (1<<3);					// set chipselect to 1
 			} else {
+				LPC_GPIO3->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
+				SSPSend2(0x41, chan); // chan: 000 - ch#1, 101 - ch#6
 				LPC_GPIO3->MASKED_ACCESS[1<<2] |= (1<<2);					// set chipselect to 1
-			}
-			if (which == 1) {
-				LPC_GPIO3->MASKED_ACCESS[1<<3] &= ((0<<3) | ~(1<<3));		// set chipselect to 0
-			} else {
+				for (which = 0; which < 75; which++) {}
 				LPC_GPIO3->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
-			}
-			// set gain
-			SSPSend2(0x40, gain); // 000 - 1, 111 - 32
-			if (which == 1) {
-				LPC_GPIO3->MASKED_ACCESS[1<<3] |= (1<<3);					// set chipselect to 1
-			} else {
+				SSPSend2(0x40, gain); // gain: 000 - 1, 111 - 32
 				LPC_GPIO3->MASKED_ACCESS[1<<2] |= (1<<2);					// set chipselect to 1
 			}
 			break;
