@@ -119,6 +119,7 @@ void PinInit() {
 	LPC_IOCON->PIO3_1 |= 0x00;
 	LPC_GPIO2->DIR |= (1<<8) | (1<<9) | (1<<10) | (1<<11);
 	LPC_GPIO3->DIR |= (1<<0) | (1<<1);
+	SwitchesState(0);
 
 	//set chip select pins function
 	LPC_IOCON->PIO0_2 &= ~0x07; // DDS
