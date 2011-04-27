@@ -39,29 +39,35 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 			break;
 		case 'd':
 			wavetype = dst[1];
-			// TODO: set DDS to (wavetype) using SPI (set PIN_10 to 0, send SPI commands, set PIN_10 to 1)
+			LPC_GPIO0->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
+			// TODO: set SPI commands
+			LPC_GPIO0->MASKED_ACCESS[1<<2] |= (0<<2);					// set chipselect to 1
 			break;
 		case 'D':
 			freq = dst[1] + (dst[2]<<8) + (dst[3]<<16) + (dst[4]<<24);
-			// TODO: set DDS to (freq) Hz using SPI (set PIN_10 to 0, send SPI commands, set PIN_10 to 1)
+			LPC_GPIO0->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
+			// TODO: set SPI commands
+			LPC_GPIO0->MASKED_ACCESS[1<<2] |= (0<<2);					// set chipselect to 1
 			break;
 		case 'm':
 			which = dst[1];
 			chan = dst[2];
 			gain = dst[3];
-			// TODO: set opamp (which) on channel (chan) with gain (gain)
-			// for opamp1: set PIN_48 to 0, send SPI commands, set PIN_48 to 1
-			// for opamp2: set PIN_43 to 0, send SPI commands, set PIN_43 to 1
+			if (which == 1) {
+				LPC_GPIO3->MASKED_ACCESS[1<<3] &= ((0<<3) | ~(1<<3));		// set chipselect to 0
+			} else {
+				LPC_GPIO3->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
+			}
+			// TODO: set opamp (which) on channel (chan) with gain (gain) via SPI
+			if (which == 1) {
+				LPC_GPIO3->MASKED_ACCESS[1<<3] |= (0<<3);					// set chipselect to 1
+			} else {
+				LPC_GPIO3->MASKED_ACCESS[1<<2] |= (0<<2);					// set chipselect to 1
+			}
 			break;
 		case 's':
 			states = dst[1];
-			// TODO: set switches to states
-			// switch1: PIN_12
-			// switch2: PIN_24
-			// switch3: PIN_25
-			// switch4: PIN_31
-			// switch5: PIN_36
-			// switch6: PIN_37
+			SwitchesSetup(states);
 			break;
 		case 'P':
 			states = dst[1];
@@ -75,6 +81,21 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 	}
 }
 
+void SwitchesSetup(uint8_t states) {
+	LPC_GPIO2->MASKED_ACCESS[1<<8] |= ((( states && 0x01) >> 0)<<8);
+	LPC_GPIO2->MASKED_ACCESS[1<<8] &= ((((states && 0x01) >> 0)<<8) | ~(1<<8));
+	LPC_GPIO2->MASKED_ACCESS[1<<9] |= ((( states && 0x02) >> 1)<<9);
+	LPC_GPIO2->MASKED_ACCESS[1<<9] &= ((((states && 0x02) >> 1)<<9) | ~(1<<9));
+	LPC_GPIO2->MASKED_ACCESS[1<<10] |= ((( states && 0x04) >> 2)<<10);
+	LPC_GPIO2->MASKED_ACCESS[1<<10] &= ((((states && 0x04) >> 2)<<10) | ~(1<<10));
+	LPC_GPIO2->MASKED_ACCESS[1<<11] |= ((( states && 0x08) >> 3)<<11);
+	LPC_GPIO2->MASKED_ACCESS[1<<11] &= ((((states && 0x08) >> 3)<<11) | ~(1<<11));
+	LPC_GPIO3->MASKED_ACCESS[1<<0] |= ((( states && 0x10) >> 4)<<0);
+	LPC_GPIO3->MASKED_ACCESS[1<<0] &= ((((states && 0x10) >> 4)<<0) | ~(1<<0));
+	LPC_GPIO3->MASKED_ACCESS[1<<1] |= ((( states && 0x20) >> 5)<<1);
+	LPC_GPIO3->MASKED_ACCESS[1<<1] &= ((((states && 0x20) >> 5)<<1) | ~(1<<1));
+}
+
 void PinInit() {
 	// set pins function
 	LPC_IOCON->PIO2_0 &= ~0x07;
@@ -83,6 +104,27 @@ void PinInit() {
 	LPC_IOCON->PIO2_6 |= 0x00;
 	LPC_IOCON->PIO2_7 &= ~0x07;
 	LPC_IOCON->PIO2_7 |= 0x00;
+	// set switches function
+	LPC_IOCON->PIO2_8 &= ~0x07;
+	LPC_IOCON->PIO2_8 |= 0x00;
+	LPC_IOCON->PIO2_9 &= ~0x07;
+	LPC_IOCON->PIO2_9 |= 0x00;
+	LPC_IOCON->PIO2_10 &= ~0x07;
+	LPC_IOCON->PIO2_10 |= 0x00;
+	LPC_IOCON->PIO2_11 &= ~0x07;
+	LPC_IOCON->PIO2_11 |= 0x00;
+	LPC_IOCON->PIO3_0 &= ~0x07;
+	LPC_IOCON->PIO3_0 |= 0x00;
+	LPC_IOCON->PIO3_1 &= ~0x07;
+	LPC_IOCON->PIO3_1 |= 0x00;
+	//set chip select pins function
+	LPC_IOCON->PIO0_2 &= ~0x07; // DDS
+	LPC_IOCON->PIO0_2 |= 0x00;
+	LPC_IOCON->PIO3_3 &= ~0x07; // OPAMP1
+	LPC_IOCON->PIO3_3 |= 0x00;
+	LPC_IOCON->PIO3_2 &= ~0x07; // OPAMP2
+	LPC_IOCON->PIO3_2 |= 0x00;
+
 	PinDir(0); // all 3 pins are output 0
 	PinState(1, 0);
 	PinState(2, 0);

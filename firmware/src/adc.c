@@ -160,7 +160,7 @@ void ADCInit( uint32_t ADC_Clk )
   to design team. */
   LPC_IOCON->PIO0_11 &= ~0x8F; /*  ADC I/O config */
   LPC_IOCON->PIO0_11 |= 0x02;  /* ADC IN0 */
-#if 0
+#if 1
   LPC_IOCON->PIO1_0  &= ~0x8F;
   LPC_IOCON->PIO1_0  |= 0x02;  /* ADC IN1 */
   LPC_IOCON->PIO1_1  &= ~0x8F;

@@ -5,3 +5,4 @@ void EnablePWM2(uint16_t period, uint16_t duty);
 void PinDir(uint16_t mask);
 void PinState(uint8_t which, uint8_t state);
 void EduInit();
+void SwitchesSetup(uint8_t states);
