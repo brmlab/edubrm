@@ -65,11 +65,11 @@ void SetOutReport (uint8_t dst[], uint32_t length)
 				LPC_GPIO3->MASKED_ACCESS[1<<3] |= (1<<3);					// set chipselect to 1
 			} else {
 				LPC_GPIO3->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
-				SSPSend2(0x41, chan); // chan: 000 - ch#1, 101 - ch#6
+				SSPSend2(0x40, gain); // gain: 000 - 1, 111 - 32
 				LPC_GPIO3->MASKED_ACCESS[1<<2] |= (1<<2);					// set chipselect to 1
 				for (which = 0; which < 75; which++) {}
 				LPC_GPIO3->MASKED_ACCESS[1<<2] &= ((0<<2) | ~(1<<2));		// set chipselect to 0
-				SSPSend2(0x40, gain); // gain: 000 - 1, 111 - 32
+				SSPSend2(0x41, chan); // chan: 000 - ch#1, 101 - ch#6
 				LPC_GPIO3->MASKED_ACCESS[1<<2] |= (1<<2);					// set chipselect to 1
 			}
 			break;
