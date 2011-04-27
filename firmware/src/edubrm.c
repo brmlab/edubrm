@@ -117,6 +117,9 @@ void PinInit() {
 	LPC_IOCON->PIO3_0 |= 0x00;
 	LPC_IOCON->PIO3_1 &= ~0x07;
 	LPC_IOCON->PIO3_1 |= 0x00;
+	LPC_GPIO2->DIR |= (1<<8) | (1<<9) | (1<<10) | (1<<11);
+	LPC_GPIO3->DIR |= (1<<0) | (1<<1);
+
 	//set chip select pins function
 	LPC_IOCON->PIO0_2 &= ~0x07; // DDS
 	LPC_IOCON->PIO0_2 |= 0x00;
@@ -124,6 +127,8 @@ void PinInit() {
 	LPC_IOCON->PIO3_3 |= 0x00;
 	LPC_IOCON->PIO3_2 &= ~0x07; // OPAMP2
 	LPC_IOCON->PIO3_2 |= 0x00;
+	LPC_GPIO0->DIR |= (1<<2);
+	LPC_GPIO3->DIR |= (1<<2) | (1<<3);
 
 	PinDir(0); // all 3 pins are output 0
 	PinState(1, 0);
