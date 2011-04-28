@@ -1,3 +1,5 @@
+import os
+
 class Device:
 
     VENDORID  = 0x1fc9
@@ -5,9 +7,9 @@ class Device:
     INSIZE    = 64
     OUTSIZE   = 64
 
-    def __init__(self, fake = False):
-        self.fake = fake
-        if not fake:
+    def __init__(self):
+        self.fake = os.getenv('EDUBRM') == 'fake'
+        if not self.fake:
             import usb
             usbdev = usb.core.find(idVendor = self.VENDORID, idProduct = self.PRODUCTID)
             if usbdev == None:
@@ -85,9 +87,9 @@ class Device:
     def read(self):
         if self.fake:
             from random import randint
-            return (randint(0,65535),                                       # AD0
-                    randint(0,65535), randint(0,65535), randint(0,65535),   # AD1 .. AD3
-                    randint(0,65535), randint(0,65535), randint(0,65535),   # AD4 .. AD6
+            return (randint(0,1023),                                        # AD0
+                    randint(0,1023), randint(0,1023), randint(0,1023),      # AD1 .. AD3
+                    randint(0,1023), randint(0,1023), randint(0,1023),      # AD4 .. AD6
                     randint(0,1), randint(0,1), randint(0,1))               # IO1 .. IO3
         else:
             i = self.epi.read(self.INSIZE)

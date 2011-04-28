@@ -26,11 +26,6 @@ class ModuleDebugWidget(QWidget):
         QObject.connect(self.ui.pushPin2, SIGNAL("clicked(bool)"), self.on_pins_changed)
         QObject.connect(self.ui.pushPin3, SIGNAL("clicked(bool)"), self.on_pins_changed)
 
-        # real device:
-        self.dev = Device()
-        # fake device:
-#        self.dev = Device(True)
-
         self.timer = QTimer()
         QObject.connect(self.timer, SIGNAL("timeout()"), self.read_inputs)
 
@@ -153,6 +148,7 @@ class ModuleDebug():
 
     def start(self):
         print 'start Debug'
+        self.widget.dev = Device()
 
     def stop(self):
         print 'stop Debug'
