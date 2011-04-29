@@ -126,7 +126,6 @@ class ModuleDebugWidget(QWidget):
             self.ui.labelIO2.setText('IO2: -')
             self.ui.labelIO3.setText('IO3: -')
 
-
     def read_inputs(self):
         r = self.dev.read()
         self.ui.labelAD0.setText('AD0: ' + str(r[0]))
@@ -147,9 +146,7 @@ class ModuleDebug():
         self.widget = ModuleDebugWidget()
 
     def start(self):
-        print 'start Debug'
         self.widget.dev = Device()
 
     def stop(self):
-        print 'stop Debug'
         self.widget.timer.stop()

@@ -1,4 +1,4 @@
-all: edubrm mainUi.py resources_rc.py modules/ModuleDebugUi.py
+all: edubrm mainUi.py resources_rc.py modules/ModuleAUi.py modules/ModuleDebugUi.py
 
 mainUi.py: main.ui
 	pyuic4 $< -o $@
@@ -6,7 +6,7 @@ mainUi.py: main.ui
 resources_rc.py: resources.qrc
 	pyrcc4 $< -o $@
 
-modules/ModuleDebugUi.py: modules/ModuleDebug.ui
+modules/Module%Ui.py: modules/Module%.ui
 	pyuic4 $< -o $@
 
 clean:
