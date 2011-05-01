@@ -89,10 +89,10 @@ class Device:
             from random import randint
             from time import time
             from math import sin
-            return (randint(0,1023),                                             # AD0
-                    int(sin(time())*511+512), randint(0,1023), randint(0,1023),  # AD1 .. AD3
-                    randint(0,1023), randint(0,1023), randint(0,1023),           # AD4 .. AD6
-                    randint(0,1), randint(0,1), randint(0,1))                    # IO1 .. IO3
+            return (randint(0,1023),                                                    # AD0
+                    int(sin(6.2832*time())*511+512), randint(0,1023), randint(0,1023),  # AD1 .. AD3
+                    randint(0,1023), randint(0,1023), int(sin(314.16*time())*511+512),  # AD4 .. AD6
+                    randint(0,1), randint(0,1), randint(0,1))                           # IO1 .. IO3
         else:
             i = self.epi.read(self.INSIZE)
             return (i[0] + (i[1]<<8),                                          # AD0

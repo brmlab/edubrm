@@ -20,10 +20,7 @@ class ModuleAWidget(QWidget):
         self.timer = QTimer()
         QObject.connect(self.timer, SIGNAL("timeout()"), self.read_inputs)
 
-        self.scene = QGraphicsScene()
-        self.ui.graphU.setScene(self.scene)
-
-        self.data = 100*[0.0]
+        self.data = 200*[0.0]
 
     def read_inputs(self):
         r = self.dev.read()
@@ -56,8 +53,8 @@ class ModuleAWidget(QWidget):
         self.scene.addSimpleText('[U]').moveBy(-39, 430-10)
         path = QPainterPath()
         path.moveTo(0,400-self.data[0]*100)
-        for i in xrange(1,100):
-            path.lineTo(6*(i+1), 400-self.data[i]*100)
+        for i in xrange(1,200):
+            path.lineTo(3*(i+1), 400-self.data[i]*100)
         self.scene.addPath(path, QPen(QColor(0,0,255), 3))
         self.ui.graphU.setScene(self.scene)
 
@@ -69,7 +66,7 @@ class ModuleA():
 
     def start(self):
         self.widget.dev = Device()
-        self.widget.timer.start(50)
+        self.widget.timer.start(40)
 
     def stop(self):
         self.widget.timer.stop()
