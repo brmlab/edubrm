@@ -5,6 +5,7 @@ from PyQt4.QtCore import QObject
 from PyQt4.QtCore import QTimer
 from ModuleDebugUi import Ui_ModuleDebug
 from device import Device
+from time import time
 
 class ModuleDebugWidget(QWidget):
 
@@ -25,6 +26,8 @@ class ModuleDebugWidget(QWidget):
         QObject.connect(self.ui.pushPin1, SIGNAL("clicked(bool)"), self.on_pins_changed)
         QObject.connect(self.ui.pushPin2, SIGNAL("clicked(bool)"), self.on_pins_changed)
         QObject.connect(self.ui.pushPin3, SIGNAL("clicked(bool)"), self.on_pins_changed)
+        self.log = None
+        self.ui.pushLog.setEnabled(False)
 
         self.timer = QTimer()
         QObject.connect(self.timer, SIGNAL("timeout()"), self.read_inputs)
@@ -112,6 +115,7 @@ class ModuleDebugWidget(QWidget):
     @pyqtSlot(int)
     def on_dialInputFreq_valueChanged(self, val):
         self.timer.stop()
+        self.ui.pushLog.setEnabled(val > 0)
         if val > 0:
             self.timer.start(1000.0/val)
         else:
@@ -126,8 +130,18 @@ class ModuleDebugWidget(QWidget):
             self.ui.labelIO2.setText('IO2: -')
             self.ui.labelIO3.setText('IO3: -')
 
+    @pyqtSlot(bool)
+    def on_pushLog_clicked(self, checked):
+        if checked:
+            self.log = open('edubrm.log', 'w')
+        else:
+            self.log.close()
+            self.log = None
+
     def read_inputs(self):
         r = self.dev.read()
+        if self.log:
+            self.log.write('{:0.6f};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d}\n'.format(time(), r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9]))
         self.ui.labelAD0.setText('AD0: ' + str(r[0]))
         self.ui.labelAD1.setText('AD1: ' + str(r[1]))
         self.ui.labelAD2.setText('AD2: ' + str(r[2]))
