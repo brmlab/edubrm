@@ -18,8 +18,8 @@ class ModuleAWidget(QWidget):
 
     def read_inputs(self):
         r = self.dev.read()
-        v = r[0]/1023.0 * 3.3
-        self.ui.labelV.setText('{:0.3f} V'.format(v))
+        v = r[1]/1023.0 * 3.3
+        self.ui.labelV.setText('%0.3f V' % v)
         self.ui.progressV.setValue(1000*v)
 
 class ModuleA():
