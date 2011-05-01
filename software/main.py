@@ -18,6 +18,8 @@ class ModuleButton(QPushButton):
         self.clicked.connect(self.on_clicked)
 
     def on_clicked(self):
+        # reinit because of the widget
+        self.mod.__init__()
         self.form.ui.areaChoose.hide()
         self.form.ui.btnExit.hide()
         self.form.ui.btnBack.show()
@@ -44,7 +46,6 @@ class Main(QMainWindow):
     def on_btnBack_clicked(self):
         self.mod.stop()
         self.ui.lblTitle.setText('EduBRM')
-        # TODO: erase everything from self.ui.areaModule
         self.ui.areaChoose.show()
         self.ui.areaModule.hide()
         self.ui.btnExit.show()

@@ -1,5 +1,7 @@
 from ModuleA import ModuleA
+from ModuleB import ModuleB
+from ModuleC import ModuleC
 from ModuleDebug import ModuleDebug
 
 def list():
-    return [ModuleDebug(),ModuleA()]
+    return [ModuleA(),ModuleB(),ModuleC(),ModuleDebug()]

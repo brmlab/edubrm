@@ -1,4 +1,4 @@
-all: edubrm mainUi.py resources_rc.py modules/ModuleAUi.py modules/ModuleDebugUi.py
+all: edubrm mainUi.py resources_rc.py modules/ModuleAUi.py modules/ModuleBUi.py modules/ModuleCUi.py modules/ModuleDebugUi.py
 
 mainUi.py: main.ui
 	pyuic4 $< -o $@

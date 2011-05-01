@@ -5,6 +5,8 @@
     <file>about.png</file>
     <file>icon.png</file>
     <file>modules/ModuleA.png</file>
+    <file>modules/ModuleB.png</file>
+    <file>modules/ModuleC.png</file>
     <file>modules/ModuleDebug.png</file>
   </qresource>
 </RCC>
