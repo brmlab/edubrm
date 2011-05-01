@@ -1,4 +1,6 @@
 from PyQt4.QtGui import QWidget
+from PyQt4.QtGui import QGraphicsScene
+from PyQt4.QtGui import QPixmap
 from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtCore import QObject
@@ -16,12 +18,29 @@ class ModuleBWidget(QWidget):
         self.timer = QTimer()
         QObject.connect(self.timer, SIGNAL("timeout()"), self.read_inputs)
 
+        self.scene_nobat = QGraphicsScene()
+        self.scene_nobat.addPixmap(QPixmap('modules/ModuleB-nobat.png'))
+        self.scene_off = QGraphicsScene()
+        self.scene_off.addPixmap(QPixmap('modules/ModuleB-off.png'))
+        self.scene_on = QGraphicsScene()
+        self.scene_on.addPixmap(QPixmap('modules/ModuleB-on.png'))
+        self.ui.widgetImg.setScene(self.scene_nobat)
+
     def read_inputs(self):
-        pass
-#        r = self.dev.read()
-#        v = r[0]/1023.0 * 3.3
-#        self.ui.labelV.setText('{:0.3f} V'.format(v))
-#        self.ui.progressV.setValue(1000*v)
+        r = self.dev.read()
+        us = r[1]/1023.0 * 3.3
+        uc = r[2]/1023.0 * 3.3
+        i = (us-uc)*10
+        self.ui.labelUs.setText('Us = %0.3f V' % us)
+        self.ui.labelUc.setText('Uc = %0.3f V' % uc)
+        self.ui.labelI.setText('I = %0.2f mA' % i)
+        if us < 1.5:
+            self.ui.widgetImg.setScene(self.scene_nobat)
+        else:
+            if uc < 1.5:
+                self.ui.widgetImg.setScene(self.scene_off)
+            else:
+                self.ui.widgetImg.setScene(self.scene_on)
 
 class ModuleB():
 

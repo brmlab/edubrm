@@ -6,6 +6,9 @@
     <file>icon.png</file>
     <file>modules/ModuleA.png</file>
     <file>modules/ModuleB.png</file>
+    <file>modules/ModuleB-nobat.png</file>
+    <file>modules/ModuleB-off.png</file>
+    <file>modules/ModuleB-on.png</file>
     <file>modules/ModuleC.png</file>
     <file>modules/ModuleDebug.png</file>
   </qresource>

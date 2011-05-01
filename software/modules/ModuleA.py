@@ -25,7 +25,7 @@ class ModuleAWidget(QWidget):
 class ModuleA():
 
     def __init__(self):
-        self.title = 'Simple dynamo'
+        self.title = 'Sources of Electricity'
         self.widget = ModuleAWidget()
 
     def start(self):
