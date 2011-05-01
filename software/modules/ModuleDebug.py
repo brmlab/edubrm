@@ -141,7 +141,7 @@ class ModuleDebugWidget(QWidget):
     def read_inputs(self):
         r = self.dev.read()
         if self.log:
-            self.log.write('{:0.6f};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d};{:d}\n'.format(time(), r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9]))
+            self.log.write('%0.6f;%d;%d;%d;%d;%d;%d;%d;%d;%d;%d\n' % (time(), r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9]))
         self.ui.labelAD0.setText('AD0: ' + str(r[0]))
         self.ui.labelAD1.setText('AD1: ' + str(r[1]))
         self.ui.labelAD2.setText('AD2: ' + str(r[2]))
