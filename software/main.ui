@@ -33,7 +33,7 @@
    <widget class="QPushButton" name="btnExit">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>710</x>
       <y>10</y>
       <width>81</width>
       <height>41</height>
@@ -50,7 +50,7 @@
    <widget class="QPushButton" name="btnAbout">
     <property name="geometry">
      <rect>
-      <x>710</x>
+      <x>10</x>
       <y>10</y>
       <width>81</width>
       <height>41</height>
