@@ -136,16 +136,10 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
     <property name="text" stdset="0">
-     <string>1</string>
-    </property>
-    <property name="minimum">
-     <number>1</number>
+     <string>0</string>
     </property>
     <property name="maximum">
      <number>50000000</number>
-    </property>
-    <property name="value">
-     <number>1</number>
     </property>
     <property name="maxLength" stdset="0">
      <number>8</number>
@@ -159,9 +153,6 @@
       <width>101</width>
       <height>81</height>
      </rect>
-    </property>
-    <property name="minimum">
-     <number>1</number>
     </property>
     <property name="maximum">
      <number>50000000</number>
