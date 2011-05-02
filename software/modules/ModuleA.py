@@ -24,7 +24,9 @@ class ModuleAWidget(QWidget):
 
     def read_inputs(self):
         r = self.dev.read()
-        u = r[1]/1023.0 * 3.3
+        u = r[1]/1023.0 * 3.3 - 0.19
+        if u < 0:
+            u = 0
         self.ui.labelU.setText('%0.3f V' % u)
         self.ui.progressU.setValue(1000*u)
         self.data.pop(0)
