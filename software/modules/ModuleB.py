@@ -35,7 +35,7 @@ class ModuleBWidget(QWidget):
         if uc < 0.0:
             uc = 0.0
         i = (us-uc)/18*1000
-        if i < 0.0:
+        if i < 0.0 or uc = 0.0:
             i = 0.0
         self.ui.labelUs.setText('Us = %0.3f V' % us)
         self.ui.labelUc.setText('Uc = %0.3f V' % uc)
