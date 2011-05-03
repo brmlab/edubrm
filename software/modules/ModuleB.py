@@ -28,7 +28,9 @@ class ModuleBWidget(QWidget):
 
     def read_inputs(self):
         r = self.dev.read()
-        us = r[1]/1023.0 * 3.3
+        us = r[1]/1023.0 * 3.3 - 0.091
+        if us < 0:
+          us = 0
         uc = r[2]/1023.0 * 3.3
         i = (us-uc)/18*1000
         self.ui.labelUs.setText('Us = %0.3f V' % us)
@@ -37,7 +39,7 @@ class ModuleBWidget(QWidget):
         if us < 1.5:
             self.ui.widgetImg.setScene(self.scene_nobat)
         else:
-            if uc < 1.5:
+            if uc < 1:
                 self.ui.widgetImg.setScene(self.scene_off)
             else:
                 self.ui.widgetImg.setScene(self.scene_on)
