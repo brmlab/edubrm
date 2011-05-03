@@ -30,7 +30,7 @@ class ModuleBWidget(QWidget):
         r = self.dev.read()
         us = r[1]/1023.0 * 3.3
         uc = r[2]/1023.0 * 3.3
-        i = (us-uc)*10
+        i = (us-uc)/18*1000
         self.ui.labelUs.setText('Us = %0.3f V' % us)
         self.ui.labelUc.setText('Uc = %0.3f V' % uc)
         self.ui.labelI.setText('I = %0.2f mA' % i)
