@@ -31,6 +31,8 @@ class Device:
                                usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN)
         else:
             print 'device init'
+        self.pwm(1, 1)
+        self.pwm(2, 1)
         self.pwm(1, 0)
         self.pwm(2, 0)
 #        self.ddswave(0) # not implemented
@@ -45,6 +47,10 @@ class Device:
 
     # sets pwm (which=1,2), (duty=16bit)
     def pwm(self, which, duty):
+        if duty < 0:
+            duty = 0
+        if duty > 65535:
+            duty = 65535
         if self.fake:
             print 'pwm', which, duty
         else:

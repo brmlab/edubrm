@@ -27,6 +27,7 @@ class ModuleAWidget(QWidget):
         u = r[1]/1023.0 * 3.3 - 0.19
         if u < 0:
             u = 0
+        self.dev.pwm(1, int(u*65536/3))
         self.ui.labelU.setText('%0.3f V' % u)
         self.ui.progressU.setValue(1000*u)
         self.data.pop(0)
