@@ -27,7 +27,6 @@ class ModuleDebugWidget(QWidget):
         QObject.connect(self.ui.pushPin2, SIGNAL("clicked(bool)"), self.on_pins_changed)
         QObject.connect(self.ui.pushPin3, SIGNAL("clicked(bool)"), self.on_pins_changed)
         self.log = None
-        self.ui.pushLog.setEnabled(False)
 
         self.timer = QTimer()
         QObject.connect(self.timer, SIGNAL("timeout()"), self.read_inputs)

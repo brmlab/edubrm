@@ -25,6 +25,63 @@ class ModuleCWidget(QWidget):
         self.data3 = 100*[0.0]
         self.data4 = 100*[0.0]
 
+        self.mode = ['DC', 'L']
+
+    @pyqtSlot()
+    def on_radioAC_clicked(self):
+        self.mode[0] = 'AC'
+        self.setup_hw()
+
+    @pyqtSlot()
+    def on_radioDC_clicked(self):
+        self.mode[0] = 'DC'
+        self.setup_hw()
+
+    @pyqtSlot()
+    def on_radioL_clicked(self):
+        self.mode[1] = 'L'
+        self.setup_hw()
+
+    @pyqtSlot()
+    def on_radioC_clicked(self):
+        self.mode[1] = 'C'
+        self.setup_hw()
+
+    @pyqtSlot()
+    def on_radioLC_clicked(self):
+        self.mode[1] = 'LC'
+        self.setup_hw()
+
+    @pyqtSlot()
+    def on_btnStart_clicked(self):
+        self.ui.btnStart.setEnabled(False)
+        self.ui.btnStop.setEnabled(True)
+        if self.mode == ['DC', 'L']:
+            self.dev.setout(1, 1)
+        if self.mode == ['DC', 'C']:
+            self.dev.setout(2, 1)
+        if self.mode == ['DC', 'LC']:
+            self.dev.setout(3, 1)
+
+    @pyqtSlot()
+    def on_btnStop_clicked(self):
+        self.ui.btnStart.setEnabled(True)
+        self.ui.btnStop.setEnabled(False)
+        if self.mode == ['DC', 'L']:
+            self.dev.setout(1, 0)
+        if self.mode == ['DC', 'C']:
+            self.dev.setout(2, 0)
+        if self.mode == ['DC', 'LC']:
+            self.dev.setout(3, 0)
+
+    def setup_hw(self):
+        if self.mode == ['DC', 'L']:
+            self.dev.switches(1<<0)
+        if self.mode == ['DC', 'C']:
+            self.dev.switches(1<<1)
+        if self.mode == ['DC', 'LC']:
+            self.dev.switches(1<<2)
+
     def setup_scene(self, scene):
         scene.addLine(-5, 200-0, 260, 200-0)
         scene.addLine(0, 200+5, 0, 200-205)
@@ -37,63 +94,25 @@ class ModuleCWidget(QWidget):
         scene.addSimpleText('1.0').moveBy(-40, 150-10)
         scene.addSimpleText('0.0').moveBy(-40, 200-10)
 
-
-    def read_inputs(self):
-        r = self.dev.read()
-        i = r[6]/1023.0 * 3.3
-        a = r[0]/1023.0 * 3.3
-        b = r[1]/1023.0 * 3.3
-        c = r[2]/1023.0 * 3.3
-
+    def tick_DC(self, u):
         self.data1.pop(0)
-        self.data2.pop(0)
-        self.data3.pop(0)
-        self.data4.pop(0)
-        self.data1.append(i)
-        self.data2.append(a)
-        self.data3.append(b)
-        self.data4.append(c)
+        self.data1.append(u)
         self.scene1 = QGraphicsScene()
-        self.scene2 = QGraphicsScene()
-        self.scene3 = QGraphicsScene()
-        self.scene4 = QGraphicsScene()
         self.setup_scene(self.scene1)
-        self.setup_scene(self.scene2)
-        self.setup_scene(self.scene3)
-        self.setup_scene(self.scene4)
-
-        self.scene1.addSimpleText('[I]').moveBy(-39, 220-10)
+        self.scene1.addSimpleText('[U]').moveBy(-39, 220-10)
         path = QPainterPath()
         path.moveTo(0,200-self.data1[0]*50)
         for i in xrange(1,100):
             path.lineTo(2.5*(i+1), 200-self.data1[i]*50)
         self.scene1.addPath(path, QPen(QColor(0,0,255), 3))
-
-        self.scene2.addSimpleText('[A]').moveBy(-39, 220-10)
-        path = QPainterPath()
-        path.moveTo(0,200-self.data2[0]*50)
-        for i in xrange(1,100):
-            path.lineTo(2.5*(i+1), 200-self.data2[i]*50)
-        self.scene2.addPath(path, QPen(QColor(0,0,255), 3))
-
-        self.scene3.addSimpleText('[B]').moveBy(-39, 220-10)
-        path = QPainterPath()
-        path.moveTo(0,200-self.data3[0]*50)
-        for i in xrange(1,100):
-            path.lineTo(2.5*(i+1), 200-self.data3[i]*50)
-        self.scene3.addPath(path, QPen(QColor(0,0,255), 3))
-
-        self.scene4.addSimpleText('[C]').moveBy(-39, 220-10)
-        path = QPainterPath()
-        path.moveTo(0,200-self.data4[0]*50)
-        for i in xrange(1,100):
-            path.lineTo(2.5*(i+1), 200-self.data4[i]*50)
-        self.scene4.addPath(path, QPen(QColor(0,0,255), 3))
-
         self.ui.graph1.setScene(self.scene1)
-        self.ui.graph2.setScene(self.scene2)
-        self.ui.graph3.setScene(self.scene3)
-        self.ui.graph4.setScene(self.scene4)
+
+    def read_inputs(self):
+        r = self.dev.read()
+
+        if self.mode[0] == 'DC':
+            u = r[0]/1023.0 * 3.3 # change this if we change opamp
+            self.tick_DC(u)
 
 class ModuleC():
 
@@ -103,6 +122,7 @@ class ModuleC():
 
     def start(self):
         self.widget.dev = Device()
+        self.widget.setup_hw()
         self.widget.timer.start(25)
 
     def stop(self):
