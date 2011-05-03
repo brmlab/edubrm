@@ -18,17 +18,7 @@
     <rect>
      <x>100</x>
      <y>10</y>
-     <width>331</width>
-     <height>251</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QGraphicsView" name="graph3">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>270</y>
-     <width>331</width>
+     <width>671</width>
      <height>251</height>
     </rect>
    </property>
@@ -36,19 +26,9 @@
   <widget class="QGraphicsView" name="graph2">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>10</y>
-     <width>321</width>
-     <height>251</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QGraphicsView" name="graph4">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
+     <x>100</x>
      <y>270</y>
-     <width>331</width>
+     <width>671</width>
      <height>251</height>
     </rect>
    </property>
