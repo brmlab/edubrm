@@ -28,11 +28,15 @@ class ModuleBWidget(QWidget):
 
     def read_inputs(self):
         r = self.dev.read()
-        us = r[1]/1023.0 * 3.3 - 0.091
-        if us < 0:
-          us = 0
-        uc = r[2]/1023.0 * 3.3
+        us = r[1]/1023.0 * 3.3 - 0.095
+        if us < 0.0:
+            us = 0.0
+        uc = r[2]/1023.0 * 3.3 - 0.04
+        if uc < 0.0:
+            uc = 0.0
         i = (us-uc)/18*1000
+        if i < 0.0:
+            i = 0.0
         self.ui.labelUs.setText('Us = %0.3f V' % us)
         self.ui.labelUc.setText('Uc = %0.3f V' % uc)
         self.ui.labelI.setText('I = %0.2f mA' % i)
