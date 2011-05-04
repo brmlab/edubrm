@@ -1,0 +1,48 @@
+Partlist
+
+Exported from edubrm.sch at 4/24/11 12:33 AM
+
+EAGLE Version 5.11.0 Copyright (c) 1988-2010 CadSoft
+
+Part     Value          Device              Package            Library        Sheet
+
+C1       10uF           CPOL-EUSMCB         SMC_B              rcl            1
+C2       10uF           CPOL-EUSMCB         SMC_B              rcl            1
+C3       100nF          C-EUC1206           C1206              rcl            1
+C4       10uF           CPOL-EUSMCB         SMC_B              rcl            1
+C5       10uF           CPOL-EUSMCB         SMC_B              rcl            1
+C6       10nF           C-EUC1206           C1206              rcl            1
+C7       10nF           C-EUC1206           C1206              rcl            1
+C8       100nF          C-EUC1206           C1206              rcl            1
+C9       100nF          C-EUC1206           C1206              rcl            1
+C10      100nF          C-EUC1206           C1206              rcl            1
+C11      100nF          C-EUC1206           C1206              rcl            1
+C12      100nF          C-EUC1206           C1206              rcl            1
+C13      100nF          C-EUC1206           C1206              rcl            1
+CN1                     USBMINIB            USB-MINIB          adafruit       1
+IC1      741G3157DCKR   741G3157DCKR        DCK_R-PDSO-G6      74xx-little-de 1
+IC2      741G3157DCKR   741G3157DCKR        DCK_R-PDSO-G6      74xx-little-de 1
+IC3      741G3157DCKR   741G3157DCKR        DCK_R-PDSO-G6      74xx-little-de 1
+IC4      741G3157DCKR   741G3157DCKR        DCK_R-PDSO-G6      74xx-little-de 1
+IC5      741G3157DCKR   741G3157DCKR        DCK_R-PDSO-G6      74xx-little-de 1
+IC6      741G3157DCKR   741G3157DCKR        DCK_R-PDSO-G6      74xx-little-de 1
+L1       100uH          L-EUL1812           L1812              rcl            1
+LED1                    LEDCHIPLED_1206     CHIPLED_1206       led            1
+R1       33R            R-EU_R1206          R1206              rcl            1
+R2       33R            R-EU_R1206          R1206              rcl            1
+R3       1k5            R-EU_R1206          R1206              rcl            1
+R4       150R           R-EU_R1206          R1206              rcl            1
+R5       10k            R-EU_R1206          R1206              rcl            1
+R6       3K9            R-EU_R1206          R1206              rcl            1
+R7       300R           R-EU_R1206          R1206              rcl            1
+S1                      TAC_SWITCHSMD       TACTILE_SWITCH_SMD SparkFun       1
+SV1                     MA06-1              MA06-1             con-lstb       1
+SV3                     MA13-1              MA13-1             con-lstb       1
+SV4                     MA13-1              MA13-1             con-lstb       1
+U$1      AD9835         AD9835              TSSOP16            SparkFun       1
+U$2      MCP6S21-SO8    MCP6S21-SO8         SO08               sargon-parts   1
+U$3      MCP6S26-SO14   MCP6S26-SO14        SO14               sargon-parts   1
+U1                      LPC1343_QFP         LQFP48             microbuilder   1
+U2                      LM1117SOT223-REFLOW SOT223-R           microbuilder   1
+U3       OSCILLATOR5X3  OSCILLATOR5X3       CRYSTAL-SMD-5X3    SparkFun       1
+U4       OSCILLATOR5X3  OSCILLATOR5X3       CRYSTAL-SMD-5X3    SparkFun       1
