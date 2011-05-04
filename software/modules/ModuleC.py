@@ -51,29 +51,20 @@ class ModuleCWidget(QWidget):
         self.mode[1] = 'LC'
         self.setup_hw()
 
-    @pyqtSlot()
-    def on_btnStart_clicked(self):
-        self.ui.btnStart.setEnabled(False)
-        self.ui.btnStop.setEnabled(True)
-        self.current = 3.3
+    @pyqtSlot(bool)
+    def on_btnPower_clicked(self, checked):
+        if checked:
+            self.current = 3.3
+            self.ui.btnPower.setText('ON')
+        else:
+            self.current = 0.0
+            self.ui.btnPower.setText('OFF')
         if self.mode == ['DC', 'L']:
-            self.dev.setout(1, 1)
+            self.dev.setout(1, checked and 1 or 0)
         if self.mode == ['DC', 'C']:
-            self.dev.setout(2, 1)
+            self.dev.setout(2, checked and 1 or 0)
         if self.mode == ['DC', 'LC']:
-            self.dev.setout(3, 1)
-
-    @pyqtSlot()
-    def on_btnStop_clicked(self):
-        self.ui.btnStart.setEnabled(True)
-        self.ui.btnStop.setEnabled(False)
-        self.current = 0.0
-        if self.mode == ['DC', 'L']:
-            self.dev.setout(1, 0)
-        if self.mode == ['DC', 'C']:
-            self.dev.setout(2, 0)
-        if self.mode == ['DC', 'LC']:
-            self.dev.setout(3, 0)
+            self.dev.setout(3, checked and 1 or 1)
 
     def setup_hw(self):
         if self.mode == ['DC', 'L']:  # AD6
