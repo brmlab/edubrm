@@ -24,16 +24,14 @@ class ModuleBWidget(QWidget):
         self.scene_off.addPixmap(QPixmap('modules/ModuleB-off.png'))
         self.scene_on = QGraphicsScene()
         self.scene_on.addPixmap(QPixmap('modules/ModuleB-on.png'))
+        self.scene_nobulb = QGraphicsScene()
+        self.scene_nobulb.addPixmap(QPixmap('modules/ModuleB-nobulb.png'))
         self.ui.widgetImg.setScene(self.scene_nobat)
 
     def read_inputs(self):
         r = self.dev.read()
-        us = r[1]/1023.0 * 3.3 - 0.095
-        if us < 0.0:
-            us = 0.0
-        uc = r[2]/1023.0 * 3.3 - 0.04
-        if uc < 0.0:
-            uc = 0.0
+        us = r[1]/1023.0 * 3.3
+        uc = r[2]/1023.0 * 3.3
         i = (us-uc)/18*1000
         if i < 0.0 or uc == 0.0:
             i = 0.0
@@ -43,8 +41,10 @@ class ModuleBWidget(QWidget):
         if us < 1.5:
             self.ui.widgetImg.setScene(self.scene_nobat)
         else:
-            if uc < 1:
+            if uc < 0.9:
                 self.ui.widgetImg.setScene(self.scene_off)
+            elif uc > 2.0:
+                self.ui.widgetImg.setScene(self.scene_nobulb)
             else:
                 self.ui.widgetImg.setScene(self.scene_on)
 

@@ -24,10 +24,8 @@ class ModuleAWidget(QWidget):
 
     def read_inputs(self):
         r = self.dev.read()
-        u = r[1]/1023.0 * 3.3 - 0.19
-        if u < 0:
-            u = 0
-        self.dev.pwm(1, int(u*65536/3))
+        u = r[1]/1023.0 * 3.3
+        self.dev.pwm(1, int(u*65536.0/3.3))
         self.ui.labelU.setText('%0.3f V' % u)
         self.ui.progressU.setValue(1000*u)
         self.data.pop(0)
@@ -53,7 +51,7 @@ class ModuleAWidget(QWidget):
         self.scene.addSimpleText('1.0').moveBy(-40, 300-10)
         self.scene.addSimpleText('0.5').moveBy(-40, 350-10)
         self.scene.addSimpleText('0.0').moveBy(-40, 400-10)
-        self.scene.addSimpleText('[U]').moveBy(-39, 430-10)
+        self.scene.addSimpleText('[U/V]').moveBy(-39, 430-10)
         path = QPainterPath()
         path.moveTo(0,400-self.data[0]*100)
         for i in xrange(1,200):
@@ -70,6 +68,7 @@ class ModuleA():
     def start(self):
         self.widget.dev = Device()
         self.widget.timer.start(40)
+        self.widget.data = 200*[0.0]
 
     def stop(self):
         self.widget.timer.stop()

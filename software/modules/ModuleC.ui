@@ -87,7 +87,7 @@
    <property name="title">
     <string>Mode</string>
    </property>
-   <widget class="QRadioButton" name="radioL">
+   <widget class="QRadioButton" name="radioC">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -97,26 +97,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>L</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioC">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>51</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
      <string>C</string>
     </property>
     <property name="checked">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="radioLC">
@@ -130,6 +114,22 @@
     </property>
     <property name="text">
      <string>LC</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioL">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>51</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>L</string>
     </property>
     <property name="checked">
      <bool>false</bool>

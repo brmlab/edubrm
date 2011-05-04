@@ -160,21 +160,29 @@ void ADCInit( uint32_t ADC_Clk )
   to design team. */
   LPC_IOCON->PIO0_11 &= ~0x8F; /*  ADC I/O config */
   LPC_IOCON->PIO0_11 |= 0x02;  /* ADC IN0 */
+  LPC_IOCON->PIO0_11 |= 1<<3;  /* ADC IN0 -- pulldown */
 #if 1
   LPC_IOCON->PIO1_0  &= ~0x8F;
   LPC_IOCON->PIO1_0  |= 0x02;  /* ADC IN1 */
+  LPC_IOCON->PIO1_0  |= 1<<3;  /* ADC IN1 -- pulldown */
   LPC_IOCON->PIO1_1  &= ~0x8F;
   LPC_IOCON->PIO1_1  |= 0x02;  /* ADC IN2 */
+  LPC_IOCON->PIO1_1  |= 1<<3;  /* ADC IN2 -- pulldown */
   LPC_IOCON->PIO1_2  &= ~0x8F;
   LPC_IOCON->PIO1_2  |= 0x02;  /* ADC IN3 */
+  LPC_IOCON->PIO1_2  |= 1<<3;  /* ADC IN3 -- pulldown */
   LPC_IOCON->PIO1_3   &= ~0x8F;
   LPC_IOCON->PIO1_3   |= 0x02;  /* ADC IN4 */
+  LPC_IOCON->PIO1_3   |= 1<<3;  /* ADC IN4 -- pulldown */
   LPC_IOCON->PIO1_4    &= ~0x8F; /* Clear bit7, change to analog mode. */	
   LPC_IOCON->PIO1_4    |= 0x01;  /* ADC IN5 */
+  LPC_IOCON->PIO1_4    |= 1<<3;  /* ADC IN5 -- pulldown */
   LPC_IOCON->PIO1_10   &= ~0x8F; /* Clear bit7, change to analog mode. */	
   LPC_IOCON->PIO1_10   |= 0x01;  /* ADC IN6 */
+  LPC_IOCON->PIO1_10   |= 1<<3;  /* ADC IN6 -- pulldown */
   LPC_IOCON->PIO1_11   &= ~0x8F; /* Clear bit7, change to analog mode. */	
   LPC_IOCON->PIO1_11   |= 0x01;  /* ADC IN7 */
+  LPC_IOCON->PIO1_11   |= 1<<3;  /* ADC IN7 -- pulldown */
 #endif
 
   LPC_ADC->CR = ( 0x01 << 0 ) |  /* SEL=1,select channel 0~7 on ADC0 */
