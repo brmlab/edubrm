@@ -1,4 +1,8 @@
 from PyQt4.QtGui import QWidget
+from PyQt4.QtGui import QGraphicsScene
+from PyQt4.QtGui import QPainterPath
+from PyQt4.QtGui import QPen
+from PyQt4.QtGui import QColor
 from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtCore import QObject
@@ -30,6 +34,9 @@ class ModuleDebugWidget(QWidget):
 
         self.timer = QTimer()
         QObject.connect(self.timer, SIGNAL("timeout()"), self.read_inputs)
+
+        self.data1 = 100*[0.0]
+        self.data2 = 100*[0.0]
 
     @pyqtSlot(int)
     def on_dialPWM1_valueChanged(self, val):
@@ -151,6 +158,44 @@ class ModuleDebugWidget(QWidget):
         self.ui.labelIO1.setText('IO1: ' + str(r[7]))
         self.ui.labelIO2.setText('IO2: ' + str(r[8]))
         self.ui.labelIO3.setText('IO3: ' + str(r[9]))
+        v1 = -1
+        if self.ui.comboChart1.currentIndex() > 0:
+            v1 = r[self.ui.comboChart1.currentIndex() - 1]
+        v2 = -1
+        if self.ui.comboChart2.currentIndex() > 0:
+            v2 = r[self.ui.comboChart2.currentIndex() - 1]
+        if v1 != -1 or v2 != -1:
+            self.chart(v1, v2)
+
+    def setup_scene(self, scene):
+        scene.addLine(-5, 0, 205, 0)
+        scene.addLine(-5, -512/6, 205, -512/6)
+        scene.addLine(-5, -1023/6, 205, -1023/6)
+        scene.addSimpleText('0').moveBy(-40, -10)
+        scene.addSimpleText('512').moveBy(-40, -512/6-10)
+        scene.addSimpleText('1023').moveBy(-40, -1023/6-10)
+
+    def chart(self, v1, v2):
+        self.data1.pop(0)
+        self.data2.pop(0)
+        self.data1.append(v1)
+        self.data2.append(v2)
+        self.scene1 = QGraphicsScene()
+        self.scene2 = QGraphicsScene()
+        self.setup_scene(self.scene1)
+        self.setup_scene(self.scene2)
+        path = QPainterPath()
+        path.moveTo(0,-self.data1[0]/6)
+        for i in xrange(1,100):
+            path.lineTo(2*(i+1), -self.data1[i]/6)
+        self.scene1.addPath(path, QPen(QColor(0,0,255), 3))
+        path = QPainterPath()
+        path.moveTo(0,-self.data2[0]/6)
+        for i in xrange(1,100):
+            path.lineTo(2*(i+1), -self.data2[i]/6)
+        self.scene2.addPath(path, QPen(QColor(0,0,255), 3))
+        self.ui.chart1.setScene(self.scene1)
+        self.ui.chart2.setScene(self.scene2)
 
 class ModuleDebug():
 

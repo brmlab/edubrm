@@ -644,7 +644,7 @@
      <x>10</x>
      <y>270</y>
      <width>461</width>
-     <height>161</height>
+     <height>241</height>
     </rect>
    </property>
    <property name="title">
@@ -846,6 +846,152 @@
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QComboBox" name="comboChart1">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>170</y>
+      <width>85</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>none</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD0</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD6</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboChart2">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>170</y>
+      <width>85</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>none</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD0</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AD6</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="labelChart1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>66</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Chart1:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelChart2">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>170</y>
+      <width>66</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Chart2:</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGraphicsView" name="chart1">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>10</y>
+     <width>291</width>
+     <height>251</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="chart2">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>270</y>
+     <width>291</width>
+     <height>251</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources/>
