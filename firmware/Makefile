@@ -16,6 +16,10 @@ obj/$(NAME).bin: obj/$(NAME).axf
 	arm-none-eabi-objcopy -O binary obj/$(NAME).axf obj/$(NAME).bin
 	checksum -v obj/$(NAME).bin
 
+dd: obj/$(NAME).bin
+	dd if=obj/$(NAME).bin of=/dev/sdb seek=4
+	sync
+
 clean:
 	rm -f obj/*.axf
 	rm -f obj/*.bin
